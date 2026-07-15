@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Action Template - WHO Workshop Brasilia 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a2e;
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 26px; color: #2c2c6c; margin-bottom: 4px; }
+  .subtitle { font-size: 15px; color: #444; margin-bottom: 24px; }
+  .lang-bar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 16px; }
+  .lang-btn {
+    padding: 8px 16px;
+    border: 1px solid #b8cfe6;
+    border-radius: 20px;
+    background: #eaf2fb;
+    color: #2c2c6c;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .lang-btn.active { background: #3a3a8c; color: #ffffff; border-color: #3a3a8c; }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .meta-box {
+    background: #eaf2fb;
+    border: 1px solid #b8cfe6;
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .meta-box label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2c2c6c; }
+  .meta-box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #b8cfe6;
+    border-radius: 4px;
+    font-size: 15px;
+    background: #ffffff;
+  }
+  .hint { font-size: 12px; color: #666; font-style: italic; margin-top: 4px; }
+  .part-header {
+    background: linear-gradient(90deg, #3a3a8c, #6a5acd);
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 24px 0 16px;
+  }
+  .question {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .question-title {
+    background: #f2f4f8;
+    padding: 12px 14px;
+    font-weight: 700;
+    font-size: 17px;
+    color: #2c2c6c;
+    border-bottom: 1px solid #ddd;
+  }
+  .question-guide { padding: 10px 14px; font-size: 14px; color: #555; font-style: italic; }
+  .question textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 12px 14px;
+    border: none;
+    border-top: 1px solid #eee;
+    font-size: 15px;
+    font-family: inherit;
+    resize: vertical;
+    background: #ffffff;
+  }
+  .question textarea:focus { outline: 2px solid #6a5acd; }
+  .tools-section { margin: 28px 0; border: 1px solid #cfe0d0; border-radius: 8px; overflow: hidden; }
+  .tools-header { background: #2e7d5b; color: #fff; padding: 12px 16px; font-size: 18px; font-weight: 700; }
+  .tools-note { padding: 10px 16px; font-size: 13px; color: #555; font-style: italic; background: #f4f9f5; border-bottom: 1px solid #e0ece1; }
+  .tool-item { padding: 12px 16px; border-bottom: 1px solid #eef3ef; }
+  .tool-item:last-child { border-bottom: none; }
+  .tool-name { font-weight: 700; color: #2e7d5b; font-size: 16px; }
+  .tool-name a { color: #2e7d5b; text-decoration: none; }
+  .tool-name a:hover { text-decoration: underline; }
+  .tool-desc { font-size: 14px; color: #333; margin-top: 3px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+  button.action {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-primary { background: #3a3a8c; color: #fff; }
+  .btn-secondary { background: #eaf2fb; color: #2c2c6c; border: 1px solid #b8cfe6; }
+  .btn-danger { background: #fbeaea; color: #8c2c2c; border: 1px solid #e6b8b8; }
+  #report {
+    display: none;
+    background: #ffffff;
+    border: 2px solid #3a3a8c;
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 24px;
+  }
+  #report h2 { color: #2c2c6c; font-size: 22px; margin-bottom: 4px; }
+  #report .report-meta { font-size: 14px; color: #444; margin-bottom: 20px; }
+  #report .report-section { margin-bottom: 20px; }
+  #report .report-q { font-weight: 700; color: #2c2c6c; font-size: 16px; margin-bottom: 4px; }
+  #report .report-a { font-size: 15px; white-space: pre-wrap; border-left: 3px solid #b8cfe6; padding: 6px 12px; background: #f8fafd; }
+  #report .empty { color: #999; font-style: italic; }
+  .status { font-size: 14px; color: #2c7c2c; margin-left: 8px; }
+  @media (max-width: 700px) {
+    .meta-grid { grid-template-columns: 1fr; }
+    body { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+  <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">Português</button>
+  <button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button>
+</div>
+
+<h1 id="t-title"></h1>
+<div class="subtitle" id="t-subtitle"></div>
+
+<div class="meta-grid">
+  <div class="meta-box">
+    <label id="t-lbl-delegation"></label>
+    <input type="text" id="delegation">
+    <div class="hint" id="t-hint-delegation"></div>
+  </div>
+  <div class="meta-box">
+    <label id="t-lbl-sectors"></label>
+    <input type="text" id="sectors">
+    <div class="hint" id="t-hint-sectors"></div>
+  </div>
+  <div class="meta-box">
+    <label id="t-lbl-participants"></label>
+    <input type="text" id="participants">
+    <div class="hint" id="t-hint-participants"></div>
+  </div>
+</div>
+
+<div class="part-header" id="t-part"></div>
+
+<div class="question">
+  <div class="question-title" id="t-q1-title"></div>
+  <div class="question-guide" id="t-q1-guide"></div>
+  <textarea id="q1"></textarea>
+</div>
+
+<div class="question">
+  <div class="question-title" id="t-q2-title"></div>
+  <div class="question-guide" id="t-q2-guide"></div>
+  <textarea id="q2"></textarea>
+</div>
+
+<div class="question">
+  <div class="question-title" id="t-q3-title"></div>
+  <div class="question-guide" id="t-q3-guide"></div>
+  <textarea id="q3"></textarea>
+</div>
+
+<div class="question">
+  <div class="question-title" id="t-q4-title"></div>
+  <div class="question-guide" id="t-q4-guide"></div>
+  <textarea id="q4"></textarea>
+</div>
+
+<div class="question">
+  <div class="question-title" id="t-q5-title"></div>
+  <div class="question-guide" id="t-q5-guide"></div>
+  <textarea id="q5"></textarea>
+</div>
+
+<div class="tools-section" id="tools-section"></div>
+
+<div class="btn-row">
+  <button class="action btn-primary" id="t-btn-generate" onclick="generateReport()"></button>
+  <button class="action btn-secondary" id="t-btn-save" onclick="saveLocal()"></button>
+  <span id="saveStatus" class="status"></span>
+  <button class="action btn-secondary" id="t-btn-export" onclick="exportJSON()"></button>
+  <button class="action btn-secondary" id="t-btn-import" onclick="document.getElementById('importFile').click()"></button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+  <button class="action btn-danger" id="t-btn-clear" onclick="clearAll()"></button>
+</div>
+
+<div id="report"></div>
+
+<script>
+const I18N = {
+  en: {
+    title: "Country Action Template",
+    subtitle: "Workshop on WHO Tools for Environmental Health, Climate Change and Equity. Brasilia, July 2026",
+    lblDelegation: "Delegation", hintDelegation: "City / State / Country",
+    lblSectors: "Sector(s)", hintSectors: "Health / Environment / Planning / Other",
+    lblParticipants: "Participants", hintParticipants: "Names and roles",
+    part: "Part A. Where We Are (Day 1)",
+    q1t: "1. Decisions to inform",
+    q1g: "What climate, air quality, or green space decisions could benefit from health impact evidence?",
+    q2t: "2. Data available today",
+    q2g: "Mortality (cause-specific? age-stratified?), air quality monitoring, NDVI/land cover, emission inventories, green space maps, population at neighborhood level?",
+    q3t: "3. Where are you stuck?",
+    q3g: "Data gaps, institutional barriers, technical capacity, cross-sector coordination, political buy-in?",
+    q4t: "4. Policy hooks",
+    q4g: "NDC commitments, municipal climate plans, air quality regulations, green space targets, health surveillance programs?",
+    q5t: "5. Equity priorities",
+    q5g: "Which populations or neighborhoods face the highest environmental health burden? Is spatial inequality in green space or air quality recognized?",
+    toolsTitle: "Support tools (WHO)",
+    toolsNote: "These are WHO Regional Office for Europe tools, calibrated for European Member States. They can support this work but require adaptation with local data. They are not plug-and-play for the Brazilian or Pantanal context.",
+    tools: [
+      { name: "GreenUr", url: "https://www.who.int/europe/tools-and-toolkits/greenur--the-green-urban-spaces-and-health-tool", desc: "QGIS plugin that measures availability and accessibility of urban green space and estimates direct health effects. Supports questions 1 and 5." },
+      { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software that quantifies the health co-benefits of carbon reductions reported in NDCs. Replaced CaRBonH. Supports question 4." },
+      { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software for health impact assessment of air pollution (PM2.5 and others), estimating attributable burden of disease. Supports questions 1 and 2." }
+    ],
+    btnGenerate: "Generate systematized report",
+    btnSave: "Save draft", btnExport: "Export (.json for GT)", btnImport: "Import (.json)", btnClear: "Clear",
+    reportTitle: "Country Action Template. Systematized Report",
+    rDelegation: "Delegation:", rSectors: "Sector(s):", rParticipants: "Participants:",
+    rGenerated: "Generated:", notFilled: "(not filled)", noAnswer: "(no answer)",
+    saved: "saved", imported: "Imported.", invalidFile: "Invalid file:",
+    confirmClear: "Clear all fields and local draft?", saveError: "Could not save locally:"
+  },
+  pt: {
+    title: "Modelo de Ação Nacional",
+    subtitle: "Oficina sobre Ferramentas da OMS para Saúde Ambiental, Mudança Climática e Equidade. Brasília, julho de 2026",
+    lblDelegation: "Delegação", hintDelegation: "Cidade / Estado / País",
+    lblSectors: "Setor(es)", hintSectors: "Saúde / Meio Ambiente / Planejamento / Outro",
+    lblParticipants: "Participantes", hintParticipants: "Nomes e funções",
+    part: "Parte A. Onde Estamos (Dia 1)",
+    q1t: "1. Decisões a informar",
+    q1g: "Quais decisões sobre clima, qualidade do ar ou áreas verdes poderiam se beneficiar de evidências de impacto na saúde?",
+    q2t: "2. Dados disponíveis hoje",
+    q2g: "Mortalidade (por causa? estratificada por idade?), monitoramento da qualidade do ar, NDVI/cobertura do solo, inventários de emissões, mapas de áreas verdes, população em nível de bairro?",
+    q3t: "3. Onde você está travado?",
+    q3g: "Lacunas de dados, barreiras institucionais, capacidade técnica, coordenação intersetorial, apoio político?",
+    q4t: "4. Ganchos de política pública",
+    q4g: "Compromissos da NDC, planos climáticos municipais, regulações de qualidade do ar, metas de áreas verdes, programas de vigilância em saúde?",
+    q5t: "5. Prioridades de equidade",
+    q5g: "Quais populações ou bairros enfrentam a maior carga de saúde ambiental? A desigualdade espacial em áreas verdes ou qualidade do ar é reconhecida?",
+    toolsTitle: "Ferramentas de apoio (OMS)",
+    toolsNote: "São ferramentas do Escritório Regional da OMS para a Europa, calibradas para os Estados-Membros europeus. Podem apoiar este trabalho, mas exigem adaptação com dados locais. Não são de uso imediato para o contexto brasileiro ou do Pantanal.",
+    tools: [
+      { name: "GreenUr", url: "https://www.who.int/europe/tools-and-toolkits/greenur--the-green-urban-spaces-and-health-tool", desc: "Plugin do QGIS que mede disponibilidade e acessibilidade de áreas verdes urbanas e estima efeitos diretos na saúde. Apoia as perguntas 1 e 5." },
+      { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software que quantifica os cobenefícios de saúde das reduções de carbono reportadas nas NDCs. Substituiu o CaRBonH. Apoia a pergunta 4." },
+      { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software de avaliação de impacto da poluição do ar na saúde (PM2.5 e outros), estimando a carga de doença atribuível. Apoia as perguntas 1 e 2." }
+    ],
+    btnGenerate: "Gerar relatório sistematizado",
+    btnSave: "Salvar rascunho", btnExport: "Exportar (.json para GT)", btnImport: "Importar (.json)", btnClear: "Limpar",
+    reportTitle: "Modelo de Ação Nacional. Relatório Sistematizado",
+    rDelegation: "Delegação:", rSectors: "Setor(es):", rParticipants: "Participantes:",
+    rGenerated: "Gerado em:", notFilled: "(não preenchido)", noAnswer: "(sem resposta)",
+    saved: "salvo", imported: "Importado.", invalidFile: "Arquivo inválido:",
+    confirmClear: "Limpar todos os campos e o rascunho local?", saveError: "Não foi possível salvar localmente:"
+  },
+  es: {
+    title: "Plantilla de Accion por Pais",
+    subtitle: "Taller sobre Herramientas de la OMS para Salud Ambiental, Cambio Climatico y Equidad. Brasilia, julio de 2026",
+    lblDelegation: "Delegacion", hintDelegation: "Ciudad / Estado / Pais",
+    lblSectors: "Sector(es)", hintSectors: "Salud / Medio Ambiente / Planificacion / Otro",
+    lblParticipants: "Participantes", hintParticipants: "Nombres y funciones",
+    part: "Parte A. Donde Estamos (Dia 1)",
+    q1t: "1. Decisiones a informar",
+    q1g: "Que decisiones sobre clima, calidad del aire o espacios verdes podrian beneficiarse de evidencia de impacto en la salud?",
+    q2t: "2. Datos disponibles hoy",
+    q2g: "Mortalidad (por causa? estratificada por edad?), monitoreo de calidad del aire, NDVI/cobertura del suelo, inventarios de emisiones, mapas de espacios verdes, poblacion a nivel de barrio?",
+    q3t: "3. Donde esta estancado?",
+    q3g: "Brechas de datos, barreras institucionales, capacidad tecnica, coordinacion intersectorial, apoyo politico?",
+    q4t: "4. Ganchos de politica",
+    q4g: "Compromisos de la NDC, planes climaticos municipales, regulaciones de calidad del aire, metas de espacios verdes, programas de vigilancia en salud?",
+    q5t: "5. Prioridades de equidad",
+    q5g: "Que poblaciones o barrios enfrentan la mayor carga de salud ambiental? Se reconoce la desigualdad espacial en espacios verdes o calidad del aire?",
+    toolsTitle: "Herramientas de apoyo (OMS)",
+    toolsNote: "Son herramientas de la Oficina Regional de la OMS para Europa, calibradas para los Estados Miembros europeos. Pueden apoyar este trabajo, pero requieren adaptacion con datos locales. No son de uso inmediato para el contexto brasileno o del Pantanal.",
+    tools: [
+      { name: "GreenUr", url: "https://www.who.int/europe/tools-and-toolkits/greenur--the-green-urban-spaces-and-health-tool", desc: "Complemento de QGIS que mide disponibilidad y accesibilidad de espacios verdes urbanos y estima efectos directos en la salud. Apoya las preguntas 1 y 5." },
+      { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software que cuantifica los cobeneficios de salud de las reducciones de carbono reportadas en las NDC. Reemplazo a CaRBonH. Apoya la pregunta 4." },
+      { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software de evaluacion del impacto de la contaminacion del aire en la salud (PM2.5 y otros), estimando la carga de enfermedad atribuible. Apoya las preguntas 1 y 2." }
+    ],
+    btnGenerate: "Generar informe sistematizado",
+    btnSave: "Guardar borrador", btnExport: "Exportar (.json para GT)", btnImport: "Importar (.json)", btnClear: "Limpiar",
+    reportTitle: "Plantilla de Accion por Pais. Informe Sistematizado",
+    rDelegation: "Delegacion:", rSectors: "Sector(es):", rParticipants: "Participantes:",
+    rGenerated: "Generado:", notFilled: "(sin completar)", noAnswer: "(sin respuesta)",
+    saved: "guardado", imported: "Importado.", invalidFile: "Archivo invalido:",
+    confirmClear: "Limpiar todos los campos y el borrador local?", saveError: "No se pudo guardar localmente:"
+  }
+};
+
+const FIELDS = ['delegation','sectors','participants','q1','q2','q3','q4','q5'];
+const STORAGE_KEY = 'countryActionTemplate_v2';
+const LANG_KEY = 'countryActionTemplate_lang';
+let LANG = 'en';
+
+function T() { return I18N[LANG]; }
+
+function applyLangText() {
+  const t = T();
+  document.documentElement.lang = LANG;
+  document.getElementById('t-title').textContent = t.title;
+  document.getElementById('t-subtitle').textContent = t.subtitle;
+  document.getElementById('t-lbl-delegation').textContent = t.lblDelegation;
+  document.getElementById('t-hint-delegation').textContent = t.hintDelegation;
+  document.getElementById('delegation').placeholder = t.hintDelegation;
+  document.getElementById('t-lbl-sectors').textContent = t.lblSectors;
+  document.getElementById('t-hint-sectors').textContent = t.hintSectors;
+  document.getElementById('sectors').placeholder = t.hintSectors;
+  document.getElementById('t-lbl-participants').textContent = t.lblParticipants;
+  document.getElementById('t-hint-participants').textContent = t.hintParticipants;
+  document.getElementById('participants').placeholder = t.hintParticipants;
+  document.getElementById('t-part').textContent = t.part;
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('t-q'+i+'-title').textContent = t['q'+i+'t'];
+    document.getElementById('t-q'+i+'-guide').textContent = t['q'+i+'g'];
+  }
+  document.getElementById('t-btn-generate').textContent = t.btnGenerate;
+  document.getElementById('t-btn-save').textContent = t.btnSave;
+  document.getElementById('t-btn-export').textContent = t.btnExport;
+  document.getElementById('t-btn-import').textContent = t.btnImport;
+  document.getElementById('t-btn-clear').textContent = t.btnClear;
+  let th = '<div class="tools-header">' + t.toolsTitle + '</div>';
+  th += '<div class="tools-note">' + t.toolsNote + '</div>';
+  t.tools.forEach(tool => {
+    th += '<div class="tool-item">';
+    th += '<div class="tool-name"><a href="' + tool.url + '" target="_blank" rel="noopener">' + tool.name + '</a></div>';
+    th += '<div class="tool-desc">' + tool.desc + '</div>';
+    th += '</div>';
+  });
+  document.getElementById('tools-section').innerHTML = th;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === LANG);
+  });
+}
+
+function setLang(l) {
+  LANG = l;
+  try { localStorage.setItem(LANG_KEY, l); } catch(e){}
+  applyLangText();
+  const r = document.getElementById('report');
+  if (r.style.display === 'block') generateReport();
+}
+
+function collect() {
+  const d = {};
+  FIELDS.forEach(f => d[f] = document.getElementById(f).value.trim());
+  return d;
+}
+function apply(d) {
+  FIELDS.forEach(f => { if (d[f] !== undefined) document.getElementById(f).value = d[f]; });
+}
+function persist() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(collect())); } catch(e){}
+}
+function saveLocal() {
+  const t = T();
+  try {
+    persist();
+    const s = document.getElementById('saveStatus');
+    s.textContent = t.saved + ' ' + new Date().toLocaleTimeString();
+    setTimeout(() => s.textContent = '', 3000);
+  } catch(e) { alert(t.saveError + ' ' + e.message); }
+}
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) apply(JSON.parse(raw));
+  } catch(e){}
+}
+
+function generateReport() {
+  const d = collect();
+  const t = T();
+  const now = new Date().toLocaleString();
+  let html = '<h2>' + t.reportTitle + '</h2>';
+  html += '<div class="report-meta">';
+  html += '<strong>' + t.rDelegation + '</strong> ' + (d.delegation || t.notFilled) + '<br>';
+  html += '<strong>' + t.rSectors + '</strong> ' + (d.sectors || t.notFilled) + '<br>';
+  html += '<strong>' + t.rParticipants + '</strong> ' + (d.participants || t.notFilled) + '<br>';
+  html += '<strong>' + t.part + '</strong><br>';
+  html += '<strong>' + t.rGenerated + '</strong> ' + now;
+  html += '</div>';
+  for (let i = 1; i <= 5; i++) {
+    const q = 'q'+i;
+    html += '<div class="report-section">';
+    html += '<div class="report-q">' + t[q+'t'] + '</div>';
+    if (d[q]) html += '<div class="report-a">' + escapeHtml(d[q]) + '</div>';
+    else html += '<div class="report-a empty">' + t.noAnswer + '</div>';
+    html += '</div>';
+  }
+  const r = document.getElementById('report');
+  r.innerHTML = html;
+  r.style.display = 'block';
+  r.scrollIntoView({ behavior: 'smooth' });
+}
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function exportJSON() {
+  const d = collect();
+  d._lang = LANG;
+  d._exported = new Date().toISOString();
+  const name = (d.delegation || 'delegation').replace(/[^a-z0-9]/gi,'_');
+  const blob = new Blob([JSON.stringify(d, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'country_action_' + name + '.json';
+  a.click();
+}
+function importJSON(ev) {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const t = T();
+  const reader = new FileReader();
+  reader.onload = e => {
+    try { apply(JSON.parse(e.target.result)); persist(); alert(t.imported); }
+    catch(err) { alert(t.invalidFile + ' ' + err.message); }
+  };
+  reader.readAsText(file);
+}
+function clearAll() {
+  const t = T();
+  if (!confirm(t.confirmClear)) return;
+  FIELDS.forEach(f => document.getElementById(f).value = '');
+  localStorage.removeItem(STORAGE_KEY);
+  document.getElementById('report').style.display = 'none';
+}
+
+// init
+try {
+  const savedLang = localStorage.getItem(LANG_KEY);
+  if (savedLang && I18N[savedLang]) LANG = savedLang;
+} catch(e){}
+FIELDS.forEach(f => {
+  document.getElementById(f).addEventListener('input', persist);
+});
+loadLocal();
+applyLangText();
+</script>
+
+</body>
+</html>
