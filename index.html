@@ -229,8 +229,6 @@
   </div>
   <div class="btn-row">
     <button class="action btn-primary" id="t-btn-view-general-admin" onclick="showGeneralReport()"></button>
-    <button class="action btn-green" id="t-btn-gen-synth" onclick="generateSynthesis()"></button>
-    <span id="synthStatus" class="status"></span>
     <button class="action btn-secondary" id="t-btn-logout-admin" onclick="logout()"></button>
   </div>
   <div id="generalReport" class="hidden"></div>
@@ -682,7 +680,6 @@ function applyLangText() {
   el('t-lbl-newgt').textContent = t.lblNewGt;
   el('t-btn-creategt').textContent = t.btnCreateGt;
   el('t-btn-view-general-admin').textContent = t.btnViewGeneralAdmin;
-  el('t-btn-gen-synth').textContent = t.btnGenSynth;
   el('t-btn-logout-admin').textContent = t.btnLogoutAdmin;
   // gt form
   el('t-lbl-delegation').textContent = t.lblDelegation;
@@ -905,18 +902,6 @@ async function showGeneralReport(){
     h+='<div class="report-meta"><strong>'+t.inClass.charAt(0).toUpperCase()+t.inClass.slice(1)+':</strong> '+esc(SESSION.turma)+'<br>';
     h+='<strong>'+t.rGtsCount+'</strong> '+rows.length+'<br><strong>'+t.rGenerated+'</strong> '+new Date().toLocaleString()+'</div>';
 
-    // saved synthesis (visible to everyone)
-    let synth=null;
-    try { const sdoc=await tDoc(SESSION.turma).collection('meta').doc('synthesis').get(); if(sdoc.exists) synth=sdoc.data(); } catch(e){}
-    h+='<div class="report-section"><div class="report-q">'+t.synthTitle+'</div>';
-    if(synth && synth.text){
-      h+='<div class="synthesis">'+esc(synth.text)+'</div>';
-      h+='<div class="synth-note">'+t.synthNote+' ('+new Date(synth.generatedAt).toLocaleString()+', '+esc(synth.model||'')+')</div>';
-    } else {
-      h+='<div class="report-a empty">'+t.synthNone+'</div>';
-    }
-    h+='</div>';
-
     // word cloud
     h+='<div class="report-section"><div class="report-q">'+t.cloudTitle+'</div>';
     h+= buildCloud(rows) || '<div class="report-a empty">'+t.noAnswer+'</div>';
@@ -935,45 +920,6 @@ async function showGeneralReport(){
   } catch(e){
     target.innerHTML='<div class="banner banner-err">'+t.loadError+' '+esc(e.message)+'</div>';
     target.classList.remove('hidden');
-  }
-}
-
-// ============ AI SYNTHESIS (admin only, runs in Claude.ai) ============
-async function generateSynthesis(){
-  const s=el('synthStatus'); const t=T(); s.className='status'; s.textContent='';
-  if(!requireFb() || SESSION.role!=='admin') return;
-  s.className='status warn'; s.textContent=t.synthWorking;
-  try {
-    const rows = await loadAllGTs();
-    if(!rows.length){ s.className='status warn'; s.textContent=t.noAnswer; return; }
-    const qLabels = {1:t.q1t,2:t.q2t,3:t.q3t,4:t.q4t,5:t.q5t};
-    let corpus='';
-    for(let i=1;i<=5;i++){
-      corpus += '\n### '+qLabels[i]+'\n';
-      rows.forEach(r=>{ if((r['q'+i]||'').trim()) corpus += '- ['+r.name+'] '+r['q'+i].trim()+'\n'; });
-    }
-    const langName = LANG==='pt'?'português':(LANG==='es'?'espanhol':'inglês');
-    const prompt =
-      'Você é relator de uma oficina da OMS. A seguir estão respostas REAIS de grupos de trabalho (GTs), organizadas por questão. '+
-      'Para CADA questão, escreva um parágrafo curto identificando as principais FORÇAS (pontos convergentes, bem fundamentados) e as principais FRAQUEZAS (lacunas, ausências, respostas vagas) do conjunto de respostas daquela questão. '+
-      'Baseie-se EXCLUSIVAMENTE no texto fornecido. NÃO invente dados, números ou fatos que não estejam nas respostas. Se uma questão tiver poucas respostas, diga isso. '+
-      'Escreva em '+langName+', em texto corrido, sem travessões. Comece cada bloco com o número e título da questão.\n\nRESPOSTAS:\n'+corpus;
-
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1500, messages:[{role:"user",content:prompt}] })
-    });
-    if(!resp.ok) throw new Error('HTTP '+resp.status);
-    const data = await resp.json();
-    const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
-    if(!text) throw new Error('empty');
-    await tDoc(SESSION.turma).collection('meta').doc('synthesis').set({
-      text, generatedAt: Date.now(), model: 'claude-sonnet-4-6'
-    });
-    s.className='status'; s.textContent=t.synthDone;
-    await showGeneralReport();
-  } catch(e){
-    s.className='status err'; s.textContent=t.synthApiFail;
   }
 }
 
