@@ -33,6 +33,17 @@
   .card h2 { color: #2c2c6c; font-size: 20px; margin-bottom: 6px; }
   .card p.desc { font-size: 14px; color: #555; margin-bottom: 16px; }
 
+  .intro { background: #f8fafd; border: 1px solid #d6e0ec; border-left: 5px solid #3a3a8c; border-radius: 10px; padding: 20px 22px; margin-bottom: 22px; }
+  .intro h2 { color: #2c2c6c; font-size: 19px; margin-bottom: 12px; }
+  .intro .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 700px) { .intro .cols { grid-template-columns: 1fr; } }
+  .intro .col h3 { font-size: 15px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #dde5ee; }
+  .intro .col.part h3 { color: #2c2c6c; }
+  .intro .col.admin h3 { color: #22503a; }
+  .intro ol { margin: 0 0 0 20px; }
+  .intro li { font-size: 14px; margin-bottom: 7px; color: #333; }
+  .intro .flag { font-size: 12px; color: #8a6d1e; background: #fdf9ec; border: 1px solid #e6d4a0; border-radius: 6px; padding: 8px 12px; margin-top: 12px; }
+
   .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media (max-width: 700px) { .gate-grid { grid-template-columns: 1fr; } }
 
@@ -121,6 +132,25 @@
   .cloud-wrap { text-align: center; padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; margin: 10px 0 4px; line-height: 2.1; }
   .cloud-word { display: inline-block; margin: 3px 8px; color: #3a3a8c; font-weight: 700; vertical-align: middle; }
 
+  .guide-wrap { margin-top: 34px; }
+  details.guide { border: 1px solid #cfe0d0; border-radius: 8px; overflow: hidden; margin-top: 12px; }
+  details.guide > summary { background: #2e7d5b; color: #fff; padding: 14px 18px; font-size: 18px; font-weight: 700; cursor: pointer; list-style: none; }
+  details.guide > summary::-webkit-details-marker { display: none; }
+  details.guide > summary::after { content: " +"; float: right; }
+  details.guide[open] > summary::after { content: " \2212"; }
+  .guide-body { padding: 18px; }
+  .guide-note { background: #fdf6ec; border: 1px solid #e6cfa0; border-left: 4px solid #c9922e; border-radius: 6px; padding: 12px 16px; font-size: 13px; color: #6b4e1a; margin-bottom: 18px; }
+  .g-step { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  .g-step-head { background: #eef3ef; color: #22503a; padding: 10px 14px; font-size: 16px; font-weight: 700; }
+  .g-num { display: inline-block; background: #2e7d5b; color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: 700; margin-right: 8px; font-size: 14px; }
+  .g-body { padding: 14px; font-size: 15px; }
+  .g-body p { margin-bottom: 9px; }
+  .g-body ul { margin: 6px 0 10px 22px; }
+  .g-body li { margin-bottom: 4px; }
+  .g-body figure { margin: 12px 0 4px; }
+  .g-body figure img { width: 100%; border: 1px solid #ccc; border-radius: 6px; display: block; }
+  .g-body figcaption { font-size: 12px; color: #777; font-style: italic; margin-top: 5px; text-align: center; }
+
   @media (max-width: 700px) { body { padding: 12px; } }
 </style>
 
@@ -142,6 +172,21 @@
 
 <!-- ============ GATE ============ -->
 <div id="gate">
+  <div class="intro">
+    <h2 id="t-intro-title"></h2>
+    <div class="cols">
+      <div class="col part">
+        <h3 id="t-intro-part-h"></h3>
+        <ol id="t-intro-part-list"></ol>
+      </div>
+      <div class="col admin">
+        <h3 id="t-intro-admin-h"></h3>
+        <ol id="t-intro-admin-list"></ol>
+      </div>
+    </div>
+    <div class="flag" id="t-intro-flag"></div>
+  </div>
+
   <div class="gate-grid">
     <div class="card">
       <h2 id="t-gate-part-title"></h2>
@@ -231,6 +276,89 @@
   </div>
 
   <div id="report" class="hidden"></div>
+
+  <div class="guide-wrap">
+    <details class="guide">
+      <summary>GreenUr. Como trabalhar com a ferramenta (passo a passo)</summary>
+      <div class="guide-body">
+        <div class="guide-note">
+          Material de referência técnica em português. As imagens são telas do próprio GreenUr 1.3.1 rodando no QGIS, usando os projetos de exemplo do plugin (Maastricht e Santiago). Os caminhos de arquivo que aparecem nas telas são do computador de origem do exemplo; ao aplicar em uma cidade brasileira ou no Pantanal, aponte para os seus próprios arquivos. Este guia não faz parte do formulário e não entra no relatório.
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">1</span>Project settings: criar o projeto</div>
+          <div class="g-body">
+            <p>Ao abrir o GreenUr no QGIS, a primeira tela é <strong>Project settings</strong>. Nela se define o arquivo do projeto (Project File, com Browse ou Create), o nome do projeto (Project name) e o diretório principal (Master directory), onde os resultados serão gravados.</p>
+            <p>Ainda nesta tela ficam o tamanho padrão da célula do raster (Default raster cell size, no exemplo 10,0 metros) e a memória RAM alocada para o processamento (no exemplo 6000 MB). Os botões Manuals e Glossary dão acesso ao manual e ao glossário. Ao final, use Save &amp; Continue.</p>
+            <figure><img src="greenur_01.jpg" alt="Tela Project settings do GreenUr"><figcaption>Project settings, com projeto de exemplo de Maastricht.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">2</span>Study Area &amp; Population: área de estudo e população</div>
+          <div class="g-body">
+            <p>Na tela <strong>Study Area Boundary and Population</strong> define-se a área de estudo. É possível escolher por país ou área (Country or areas) ou carregar um limite próprio em Study area boundary, aceitando arquivos vetoriais como .gpkg ou .shp (botão Browse).</p>
+            <p>A opção Subareas (vector map) permite carregar subdivisões internas da área. Em Population, a caixa Add population map carrega o mapa de população que será usado nos cálculos de acessibilidade. Save &amp; Continue avança.</p>
+            <figure><img src="greenur_02.jpg" alt="Tela Study Area and Population"><figcaption>Definição da área de estudo, subáreas e mapa de população.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">3</span>Definition of Green Space: definir o que é área verde</div>
+          <div class="g-body">
+            <p>Na tela <strong>Definition of Green Space</strong> define-se como o espaço verde é identificado. A opção NDVI usa um raster de NDVI (NDVI map) com um limiar (Thresholds; no exemplo 0,250), acima do qual o pixel é considerado verde.</p>
+            <p>A opção Parks &amp; Gardens, sob OpenStreetMap (vector maps), usa camadas vetoriais de parques e jardins. Há ainda Other Definitions para definições adicionais. Cada fonte é carregada pelo seu próprio Browse.</p>
+            <figure><img src="greenur_03.jpg" alt="Tela Definition of Green Space"><figcaption>Definição de área verde por NDVI e por parques e jardins do OSM.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">4</span>Availability of Green Spaces: disponibilidade (etapa 1 de 2)</div>
+          <div class="g-body">
+            <p>No grupo <strong>Availability of Green Spaces</strong>, a etapa 1 de 2 (Current situation: Calculation of % of GS vs. total area) calcula a proporção de área verde em relação à área total. Na aba Parameters, escolhe-se a definição de verde a usar (no exemplo, NDVI). O botão Run analysis executa; a aba Results mostra a saída.</p>
+            <figure><img src="greenur_04.jpg" alt="Availability of Green Spaces etapa 1"><figcaption>Etapa 1: percentual de área verde sobre a área total.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">5</span>Availability of Green Spaces: acessibilidade (etapa 2 de 2)</div>
+          <div class="g-body">
+            <p>A etapa 2 de 2 (Proportion of urban population living within a specified distance) calcula a proporção da população que vive a uma certa distância de uma área verde. Os parâmetros incluem a definição de verde (Green space), a área mínima de espaço verde (Min green space area, no exemplo 0,50 ha) e a distância de acesso (Create buffer, no exemplo 300 m).</p>
+            <p>Em green space considered, escolhe-se contar apenas o verde dentro dos limites oficiais da cidade (only within the official boundaries of the city) ou também fora (also outside). O mapa de população definido antes é usado aqui.</p>
+            <figure><img src="greenur_05.jpg" alt="Availability of Green Spaces etapa 2"><figcaption>Etapa 2: população dentro da distância de acesso ao verde, com buffer de 300 m.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">6</span>Analysis Selection: escolher a análise de serviços ecossistêmicos</div>
+          <div class="g-body">
+            <p>A árvore de análises à esquerda organiza os módulos do GreenUr: <strong>Availability of Green Spaces</strong>, <strong>Impacts on health &amp; well-being</strong> (com Mortality, Morbidity and mental health, Social interaction, Medical expenditures), <strong>Ecosystem Services</strong> e <strong>Active Transport</strong>.</p>
+            <p>Na tela Analysis Selection, dentro de Ecosystem Services, escolhe-se o efeito a analisar: Effects on air pollution, Urban Heat Island Effect, Effects on noise, Effects on pollen, Flood control ou Tree module. No exemplo está selecionado Urban Heat Island Effect (efeito de ilha de calor urbana).</p>
+            <figure><img src="greenur_06.jpg" alt="Analysis Selection, Ecosystem Services"><figcaption>Seleção do módulo de serviços ecossistêmicos, com Urban Heat Island Effect marcado.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">7</span>Urban Heat Island Effect: parâmetros (exemplo Santiago)</div>
+          <div class="g-body">
+            <p>A análise Urban Heat Island Effect usa o NDVI atual (Current NDVI) e um NDVI contrafactual (Counterfactual NDVI), que pode ser o 5º percentil (5th percentile) ou o valor 0.1. O modo (Mode) pode ser burden (carga) ou intervention (intervenção). Há a opção de usar a temperatura média local do ar da estação quente (Use local mean warm-season air temperature).</p>
+            <p>Esta tela vem do projeto de exemplo de Santiago, com suas próprias camadas de subáreas e população. Run analysis executa a etapa.</p>
+            <figure><img src="greenur_07.jpg" alt="Urban Heat Island Effect parâmetros"><figcaption>Parâmetros da análise de ilha de calor urbana.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="g-step">
+          <div class="g-step-head"><span class="g-num">8</span>Ler os resultados na aba Results</div>
+          <div class="g-body">
+            <p>Concluída a análise, a aba <strong>Results</strong> mostra o relatório da etapa. No exemplo, o GreenUr avisa que o NDVI contrafactual menor que 0.1 foi ajustado para 0.1 a fim de evitar resultados irreais, e informa a camada gerada de mudança de temperatura do ar (Change in air temperature) com as colunas ndvi_average, delta_t, delta_t_lower e delta_t_upper.</p>
+            <p>O rodapé traz o tempo de execução da etapa. Os arquivos de saída ficam no diretório do projeto definido no passo 1, prontos para serem abertos como camadas no QGIS.</p>
+            <figure><img src="greenur_08.jpg" alt="Aba Results do Urban Heat Island Effect"><figcaption>Resultados da etapa, com as colunas da camada de variação de temperatura.</figcaption></figure>
+          </div>
+        </div>
+
+      </div>
+    </details>
+  </div>
 </div>
 
 <script>
@@ -265,7 +393,23 @@ const ROOT = 'workshops';
 const I18N = {
   en: {
     title: "Country Action Template",
-    subtitle: "Workshop on WHO Tools for Environmental Health, Climate Change and Equity. Brasilia, July 2026",
+    subtitle: "Assessment of actions for climate change adaptation and mitigation, and how to work with WHO support tools.",
+    introTitle: "How it works",
+    introPartH: "If you are a working group (GT)",
+    introPartList: [
+      "Get from the coordinator the class name and your access code.",
+      "In the right-hand box below, type the class name, your group name and the access code, then enter.",
+      "Answer the five questions. Your text is saved live to the shared database (also auto-saved when you leave a field).",
+      "Use \"Group report\" for your own report and \"Consolidated report\" to see all groups plus the word cloud and synthesis."
+    ],
+    introAdminH: "If you are the coordinator (admin)",
+    introAdminList: [
+      "In the left box, type a class name and set an admin password. The first time, it creates the class.",
+      "In \"Working groups\", create each group; the system generates a unique code. Share the class name plus that code with each group.",
+      "Everything the groups save appears live in the group list and in the consolidated report.",
+      "Use \"Generate AI synthesis\" to produce strengths and weaknesses per question. It is saved and becomes visible to everyone."
+    ],
+    introFlag: "The AI synthesis runs only inside Claude.ai. On the published site it is read-only: the admin generates it in Claude.ai and everyone reads the saved version. Everything else works anywhere.",
     gatePartTitle: "Enter as a working group (GT)",
     gatePartDesc: "Type the class name, your group name and the access code given by the coordinator.",
     lblTurmaPart: "Class name", lblGtName: "Group name (GT)", lblGtCode: "Access code",
@@ -329,7 +473,23 @@ const I18N = {
   },
   pt: {
     title: "Modelo de Ação Nacional",
-    subtitle: "Oficina sobre Ferramentas da OMS para Saúde Ambiental, Mudança Climática e Equidade. Brasília, julho de 2026",
+    subtitle: "Avaliação de ações para o enfrentamento às mudanças climáticas e como trabalhar com as ferramentas de apoio da OMS.",
+    introTitle: "Como funciona",
+    introPartH: "Se você é um grupo de trabalho (GT)",
+    introPartList: [
+      "Receba da coordenação o nome da turma e o seu código de acesso.",
+      "No quadro à direita abaixo, digite o nome da turma, o nome do seu grupo e o código de acesso, e entre.",
+      "Responda às cinco questões. O texto é salvo ao vivo no banco compartilhado (também salva sozinho ao sair de cada campo).",
+      "Use \"Relatório do grupo\" para o relatório de vocês e \"Relatório consolidado\" para ver todos os grupos, a nuvem de palavras e a síntese."
+    ],
+    introAdminH: "Se você é a coordenação (admin)",
+    introAdminList: [
+      "No quadro à esquerda, digite um nome de turma e defina uma senha de admin. Na primeira vez, a turma é criada.",
+      "Em \"Grupos de trabalho\", crie cada grupo; o sistema gera um código único. Passe o nome da turma mais esse código para cada grupo.",
+      "Tudo que os grupos salvam aparece ao vivo na lista de grupos e no relatório consolidado.",
+      "Use \"Gerar síntese por IA\" para produzir forças e fraquezas por questão. Ela fica salva e visível para todos."
+    ],
+    introFlag: "A síntese por IA só roda dentro do Claude.ai. No site publicado ela é apenas leitura: o admin gera dentro do Claude.ai e todos leem a versão salva. O resto funciona em qualquer lugar.",
     gatePartTitle: "Entrar como grupo de trabalho (GT)",
     gatePartDesc: "Digite o nome da turma, o nome do seu grupo e o código de acesso fornecido pela coordenação.",
     lblTurmaPart: "Nome da turma", lblGtName: "Nome do grupo (GT)", lblGtCode: "Código de acesso",
@@ -393,7 +553,23 @@ const I18N = {
   },
   es: {
     title: "Plantilla de Accion por Pais",
-    subtitle: "Taller sobre Herramientas de la OMS para Salud Ambiental, Cambio Climatico y Equidad. Brasilia, julio de 2026",
+    subtitle: "Evaluacion de acciones para el enfrentamiento del cambio climatico y como trabajar con las herramientas de apoyo de la OMS.",
+    introTitle: "Como funciona",
+    introPartH: "Si usted es un grupo de trabajo (GT)",
+    introPartList: [
+      "Reciba de la coordinacion el nombre de la clase y su codigo de acceso.",
+      "En el recuadro de la derecha, escriba el nombre de la clase, el nombre de su grupo y el codigo de acceso, y entre.",
+      "Responda las cinco preguntas. El texto se guarda en vivo en la base compartida (tambien se guarda solo al salir de cada campo).",
+      "Use \"Informe del grupo\" para su propio informe y \"Informe consolidado\" para ver todos los grupos, la nube de palabras y la sintesis."
+    ],
+    introAdminH: "Si usted es la coordinacion (admin)",
+    introAdminList: [
+      "En el recuadro de la izquierda, escriba un nombre de clase y defina una contrasena de admin. La primera vez, se crea la clase.",
+      "En \"Grupos de trabajo\", cree cada grupo; el sistema genera un codigo unico. Comparta el nombre de la clase mas ese codigo con cada grupo.",
+      "Todo lo que los grupos guardan aparece en vivo en la lista de grupos y en el informe consolidado.",
+      "Use \"Generar sintesis por IA\" para producir fortalezas y debilidades por pregunta. Queda guardada y visible para todos."
+    ],
+    introFlag: "La sintesis por IA solo funciona dentro de Claude.ai. En el sitio publicado es solo lectura: el admin la genera en Claude.ai y todos leen la version guardada. El resto funciona en cualquier lugar.",
     gatePartTitle: "Entrar como grupo de trabajo (GT)",
     gatePartDesc: "Escriba el nombre de la clase, el nombre de su grupo y el codigo de acceso dado por la coordinacion.",
     lblTurmaPart: "Nombre de la clase", lblGtName: "Nombre del grupo (GT)", lblGtCode: "Codigo de acceso",
@@ -473,6 +649,13 @@ function applyLangText() {
   document.documentElement.lang = LANG;
   el('t-title').textContent = t.title;
   el('t-subtitle').textContent = t.subtitle;
+  // intro
+  el('t-intro-title').textContent = t.introTitle;
+  el('t-intro-part-h').textContent = t.introPartH;
+  el('t-intro-part-list').innerHTML = t.introPartList.map(x=>'<li>'+esc(x)+'</li>').join('');
+  el('t-intro-admin-h').textContent = t.introAdminH;
+  el('t-intro-admin-list').innerHTML = t.introAdminList.map(x=>'<li>'+esc(x)+'</li>').join('');
+  el('t-intro-flag').textContent = t.introFlag;
   // gate
   el('t-gate-part-title').textContent = t.gatePartTitle;
   el('t-gate-part-desc').textContent = t.gatePartDesc;
