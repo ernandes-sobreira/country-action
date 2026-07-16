@@ -217,6 +217,7 @@
 <!-- ============ ADMIN PANEL ============ -->
 <div id="adminPanel" class="hidden">
   <div class="banner banner-ok" id="t-admin-banner"></div>
+  <div class="banner banner-info" id="turmaNameBox"></div>
   <div class="card">
     <h2 id="t-admin-gts-title"></h2>
     <p class="desc" id="t-admin-gts-desc"></p>
@@ -462,7 +463,9 @@ const I18N = {
     whoami: "You are in group",
     inClass: "in class",
     errNoTurma: "Type the class name.", errNoGt: "Type the group name.", errNoCode: "Type the access code.",
-    errNoPass: "Type the admin password.", errBadCode: "Group or code not found in this class.",
+    errNoPass: "Type the admin password.", errBadCode: "Group or code not found in this class. Most likely the class name does not match the one the admin created. Ask the admin for the exact class name.",
+    turmaNameLabel: "Class name to share with groups (type it exactly like this):",
+    enterHintLabel: "To enter, each group uses:",
     errBadPass: "Wrong admin password for this class.",
     errNoFb: "No connection to the database. Check your Firebase setup and internet. Nothing was saved.",
     gtCreated: "Group created.", gtExists: "A group with that name already exists.",
@@ -542,7 +545,9 @@ const I18N = {
     whoami: "Você está no grupo",
     inClass: "na turma",
     errNoTurma: "Digite o nome da turma.", errNoGt: "Digite o nome do grupo.", errNoCode: "Digite o código de acesso.",
-    errNoPass: "Digite a senha de admin.", errBadCode: "Grupo ou código não encontrado nesta turma.",
+    errNoPass: "Digite a senha de admin.", errBadCode: "Grupo ou código não encontrado nesta turma. O mais provável é que o nome da turma esteja diferente do que o admin criou. Peça ao admin o nome exato da turma.",
+    turmaNameLabel: "Nome da turma para passar aos grupos (digite exatamente assim):",
+    enterHintLabel: "Para entrar, cada grupo usa:",
     errBadPass: "Senha de admin incorreta para esta turma.",
     errNoFb: "Sem conexão com o banco de dados. Verifique o Firebase e a internet. Nada foi salvo.",
     gtCreated: "Grupo criado.", gtExists: "Já existe um grupo com esse nome.",
@@ -622,7 +627,9 @@ const I18N = {
     whoami: "Usted esta en el grupo",
     inClass: "en la clase",
     errNoTurma: "Escriba el nombre de la clase.", errNoGt: "Escriba el nombre del grupo.", errNoCode: "Escriba el codigo de acceso.",
-    errNoPass: "Escriba la contrasena de admin.", errBadCode: "Grupo o codigo no encontrado en esta clase.",
+    errNoPass: "Escriba la contrasena de admin.", errBadCode: "Grupo o codigo no encontrado en esta clase. Lo mas probable es que el nombre de la clase sea distinto del que creo el admin. Pida al admin el nombre exacto de la clase.",
+    turmaNameLabel: "Nombre de la clase para compartir con los grupos (escribalo exactamente asi):",
+    enterHintLabel: "Para entrar, cada grupo usa:",
     errBadPass: "Contrasena de admin incorrecta para esta clase.",
     errNoFb: "Sin conexion con la base de datos. Verifique Firebase e internet. No se guardo nada.",
     gtCreated: "Grupo creado.", gtExists: "Ya existe un grupo con ese nombre.",
@@ -740,6 +747,7 @@ async function enterAsAdmin(){
     el('gate').classList.add('hidden');
     el('adminPanel').classList.remove('hidden');
     el('gtPanel').classList.add('hidden');
+    el('turmaNameBox').innerHTML = '<strong>'+T().turmaNameLabel+'</strong> <span class="code-chip">'+esc(turma)+'</span>';
     await renderGtList();
   } catch(e){ s.className='status err'; s.textContent=t.loadError+' '+e.message; }
 }
@@ -775,12 +783,13 @@ async function renderGtList(){
   const rows=[];
   snap.forEach(d=>rows.push(d.data()));
   rows.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
-  let h='<table class="gt-table"><thead><tr><th>'+t.thName+'</th><th>'+t.thCode+'</th><th>'+t.thUpdated+'</th><th>'+t.thStatus+'</th></tr></thead><tbody>';
-  if(!rows.length){ h+='<tr><td colspan="4" style="color:#999">-</td></tr>'; }
+  let h='<table class="gt-table"><thead><tr><th>'+t.thName+'</th><th>'+t.thCode+'</th><th>'+t.enterHintLabel+'</th><th>'+t.thUpdated+'</th><th>'+t.thStatus+'</th></tr></thead><tbody>';
+  if(!rows.length){ h+='<tr><td colspan="5" style="color:#999">-</td></tr>'; }
   rows.forEach(r=>{
     const answered = FIELDS.some(f=>(r[f]||'').trim());
     const when = r.updatedAt ? new Date(r.updatedAt).toLocaleString() : '-';
-    h+='<tr><td>'+esc(r.name)+'</td><td class="code">'+esc(r.code)+'</td><td>'+when+'</td><td>'+(answered?t.stAnswered:t.stEmpty)+'</td></tr>';
+    const entry = t.lblTurmaPart+': <span class="code-chip">'+esc(SESSION.turma)+'</span> + '+t.lblGtCode+': <span class="code-chip">'+esc(r.code)+'</span>';
+    h+='<tr><td>'+esc(r.name)+'</td><td class="code">'+esc(r.code)+'</td><td>'+entry+'</td><td>'+when+'</td><td>'+(answered?t.stAnswered:t.stEmpty)+'</td></tr>';
   });
   h+='</tbody></table>';
   el('gtList').innerHTML=h;
