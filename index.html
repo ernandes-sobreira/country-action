@@ -123,6 +123,29 @@
   #report .report-a { font-size: 15px; white-space: pre-wrap; border-left: 3px solid #b8cfe6; padding: 6px 12px; background: #f8fafd; }
   #report .empty { color: #999; font-style: italic; }
   .status { font-size: 14px; color: #2c7c2c; margin-left: 8px; }
+  .guide-wrap { margin-top: 40px; border-top: 2px dashed #cfe0d0; padding-top: 20px; }
+  details.guide { border: 1px solid #cfe0d0; border-radius: 8px; overflow: hidden; margin-top: 12px; }
+  details.guide > summary {
+    background: #2e7d5b; color: #fff; padding: 14px 18px;
+    font-size: 18px; font-weight: 700; cursor: pointer; list-style: none;
+  }
+  details.guide > summary::-webkit-details-marker { display: none; }
+  details.guide > summary::after { content: " +"; float: right; }
+  details.guide[open] > summary::after { content: " -"; }
+  .guide-body { padding: 18px; }
+  .guide-note { background: #fdf6ec; border: 1px solid #e6cfa0; border-left: 4px solid #c9922e; border-radius: 6px; padding: 12px 16px; font-size: 13px; color: #6b4e1a; margin-bottom: 18px; }
+  .g-step { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  .g-step-head { background: #eef3ef; color: #22503a; padding: 10px 14px; font-size: 16px; font-weight: 700; }
+  .g-num { display: inline-block; background: #2e7d5b; color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: 700; margin-right: 8px; font-size: 14px; }
+  .g-body { padding: 14px; font-size: 15px; }
+  .g-body p { margin-bottom: 9px; }
+  .g-body ul { margin: 6px 0 10px 22px; }
+  .g-body li { margin-bottom: 4px; }
+  .path { font-family: Consolas, monospace; background: #eef3ef; padding: 2px 7px; border-radius: 4px; font-size: 14px; color: #22503a; }
+  .url-box { font-family: Consolas, monospace; background: #1e2a24; color: #9fe6bf; padding: 10px 14px; border-radius: 6px; font-size: 15px; word-break: break-all; margin: 10px 0; display: block; }
+  .g-body figure { margin: 12px 0 4px; }
+  .g-body figure img { width: 100%; border: 1px solid #ccc; border-radius: 6px; display: block; }
+  .g-body figcaption { font-size: 12px; color: #777; font-style: italic; margin-top: 5px; text-align: center; }
   @media (max-width: 700px) {
     .meta-grid { grid-template-columns: 1fr; }
     body { padding: 12px; }
@@ -204,6 +227,62 @@
 
 <div id="report"></div>
 
+<div class="guide-wrap">
+  <details class="guide">
+    <summary id="t-guide-summary">Guia de Instalação do GreenUr no QGIS</summary>
+    <div class="guide-body">
+      <div class="guide-note">
+        Material de referência técnica, disponível apenas em português. Não faz parte do formulário e não entra no relatório sistematizado. As imagens são fotos de tela do próprio workshop, recortadas e tratadas para melhorar a legibilidade.
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-head"><span class="g-num">1</span>Instalar o QGIS 3.44</div>
+        <div class="g-body">
+          <p>Baixe e instale o QGIS versão 3.44 pelo site oficial <a href="https://qgis.org/download/" target="_blank" rel="noopener">qgis.org/download</a>. O GreenUr 1.3.1 exige versão recente da série 3.x; o parâmetro usado no workshop foi <span class="path">?qgis=3.44</span>.</p>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-head"><span class="g-num">2</span>Ativar os complementos Processing e GRASS</div>
+        <div class="g-body">
+          <p>No QGIS, vá em <span class="path">Complementos &gt; Gerenciar e Instalar Complementos &gt; Tudo</span>. Busque por "processing" e confirme que estão marcados e ativos:</p>
+          <ul><li><strong>Processing</strong></li><li><strong>GRASS GIS Processing Provider</strong></li></ul>
+          <p>São pré-requisito porque o GreenUr executa parte dos cálculos via GRASS.</p>
+          <figure><img src="img/passo_grass_processing.jpg" alt="Processing e GRASS marcados"><figcaption>Aba Instalados com Processing e GRASS ativos.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-head"><span class="g-num">3</span>Ajustar a filtragem de feições no Processamento</div>
+        <div class="g-body">
+          <p>Vá em <span class="path">Configurações &gt; Opções &gt; Processamento &gt; Geral</span>. Localize <strong>Filtragem de feições inválida</strong>, dê duplo clique no valor ao lado e escolha <strong>Pular (ignorar) feições com geometria inválida</strong>. Isso evita que geometrias inválidas interrompam a execução no meio.</p>
+          <figure><img src="img/passo_options_processing.jpg" alt="Opções Processamento Geral"><figcaption>Opções &gt; Processamento &gt; Geral.</figcaption></figure>
+          <figure><img src="img/passo_processamento_filtragem.jpg" alt="Filtragem definida como Pular"><figcaption>Filtragem de feições inválida definida como Pular.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-head"><span class="g-num">4</span>Adicionar o repositório do GreenUr</div>
+        <div class="g-body">
+          <p>Vá em <span class="path">Complementos &gt; Gerenciar e Instalar Complementos &gt; Opções</span>. Em Repositórios de Complementos, clique em <strong>Adicionar</strong>. Preencha Nome: GreenUr, e a URL abaixo. Deixe Sem autenticação e Habilitado marcado, e clique OK. O status deve ficar "conectado".</p>
+          <span class="url-box">https://apps.mundialis.de/who/GreenUr/plugins.xml</span>
+          <figure><img src="img/passo_add_repo_detalhes.jpg" alt="Detalhes do repositório GreenUr"><figcaption>Nome GreenUr e a URL do plugins.xml.</figcaption></figure>
+          <figure><img src="img/passo_repos_conectados.jpg" alt="GreenUr conectado"><figcaption>Repositório GreenUr conectado.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="g-step">
+        <div class="g-step-head"><span class="g-num">5</span>Instalar o complemento GreenUr</div>
+        <div class="g-body">
+          <p>Volte para a aba <span class="path">Tudo</span> e digite "green" na busca. Selecione <strong>GreenUr</strong> (autor mundialis, versão 1.3.1) e clique em <strong>Instalar Complemento</strong>.</p>
+          <figure><img src="img/passo_buscar_greenur.jpg" alt="Busca por GreenUr"><figcaption>GreenUr localizado, pronto para instalar.</figcaption></figure>
+        </div>
+      </div>
+
+    </div>
+  </details>
+</div>
+
 <script>
 const I18N = {
   en: {
@@ -236,7 +315,8 @@ const I18N = {
     rDelegation: "Delegation:", rSectors: "Sector(s):", rParticipants: "Participants:",
     rGenerated: "Generated:", notFilled: "(not filled)", noAnswer: "(no answer)",
     saved: "saved", imported: "Imported.", invalidFile: "Invalid file:",
-    confirmClear: "Clear all fields and local draft?", saveError: "Could not save locally:"
+    confirmClear: "Clear all fields and local draft?", saveError: "Could not save locally:",
+    guideSummary: "GreenUr installation guide for QGIS (Portuguese only)"
   },
   pt: {
     title: "Modelo de Ação Nacional",
@@ -268,7 +348,8 @@ const I18N = {
     rDelegation: "Delegação:", rSectors: "Setor(es):", rParticipants: "Participantes:",
     rGenerated: "Gerado em:", notFilled: "(não preenchido)", noAnswer: "(sem resposta)",
     saved: "salvo", imported: "Importado.", invalidFile: "Arquivo inválido:",
-    confirmClear: "Limpar todos os campos e o rascunho local?", saveError: "Não foi possível salvar localmente:"
+    confirmClear: "Limpar todos os campos e o rascunho local?", saveError: "Não foi possível salvar localmente:",
+    guideSummary: "Guia de Instalação do GreenUr no QGIS"
   },
   es: {
     title: "Plantilla de Accion por Pais",
@@ -300,7 +381,8 @@ const I18N = {
     rDelegation: "Delegacion:", rSectors: "Sector(es):", rParticipants: "Participantes:",
     rGenerated: "Generado:", notFilled: "(sin completar)", noAnswer: "(sin respuesta)",
     saved: "guardado", imported: "Importado.", invalidFile: "Archivo invalido:",
-    confirmClear: "Limpiar todos los campos y el borrador local?", saveError: "No se pudo guardar localmente:"
+    confirmClear: "Limpiar todos los campos y el borrador local?", saveError: "No se pudo guardar localmente:",
+    guideSummary: "Guía de instalación de GreenUr en QGIS (solo en portugués)"
   }
 };
 
@@ -344,6 +426,7 @@ function applyLangText() {
     th += '</div>';
   });
   document.getElementById('tools-section').innerHTML = th;
+  document.getElementById('t-guide-summary').textContent = t.guideSummary;
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === LANG);
   });
