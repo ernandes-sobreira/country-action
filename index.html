@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,74 +19,52 @@
   .subtitle { font-size: 15px; color: #444; margin-bottom: 24px; }
   .lang-bar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 16px; }
   .lang-btn {
-    padding: 8px 16px;
-    border: 1px solid #b8cfe6;
-    border-radius: 20px;
-    background: #eaf2fb;
-    color: #2c2c6c;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+    padding: 8px 16px; border: 1px solid #b8cfe6; border-radius: 20px;
+    background: #eaf2fb; color: #2c2c6c; font-size: 14px; font-weight: 600; cursor: pointer;
   }
   .lang-btn.active { background: #3a3a8c; color: #ffffff; border-color: #3a3a8c; }
-  .meta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+
+  .hidden { display: none !important; }
+
+  .card {
+    background: #ffffff; border: 1px solid #d6e0ec; border-radius: 10px;
+    padding: 22px; margin-bottom: 20px;
   }
-  .meta-box {
-    background: #eaf2fb;
-    border: 1px solid #b8cfe6;
-    border-radius: 6px;
-    padding: 12px;
+  .card h2 { color: #2c2c6c; font-size: 20px; margin-bottom: 6px; }
+  .card p.desc { font-size: 14px; color: #555; margin-bottom: 16px; }
+
+  .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .gate-grid { grid-template-columns: 1fr; } }
+
+  label.fld { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2c2c6c; }
+  input.fld, select.fld {
+    width: 100%; padding: 10px; border: 1px solid #b8cfe6; border-radius: 6px;
+    font-size: 15px; background: #ffffff; margin-bottom: 14px;
   }
+  input.fld:focus, select.fld:focus { outline: 2px solid #6a5acd; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 700px) { .meta-grid { grid-template-columns: 1fr; } }
+  .meta-box { background: #eaf2fb; border: 1px solid #b8cfe6; border-radius: 6px; padding: 12px; }
   .meta-box label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2c2c6c; }
   .meta-box input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #b8cfe6;
-    border-radius: 4px;
-    font-size: 15px;
-    background: #ffffff;
+    width: 100%; padding: 8px; border: 1px solid #b8cfe6; border-radius: 4px; font-size: 15px; background: #ffffff;
   }
   .hint { font-size: 12px; color: #666; font-style: italic; margin-top: 4px; }
+
   .part-header {
-    background: linear-gradient(90deg, #3a3a8c, #6a5acd);
-    color: #ffffff;
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-size: 19px;
-    font-weight: 700;
-    margin: 24px 0 16px;
+    background: linear-gradient(90deg, #3a3a8c, #6a5acd); color: #ffffff;
+    padding: 12px 16px; border-radius: 6px; font-size: 19px; font-weight: 700; margin: 24px 0 16px;
   }
-  .question {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    overflow: hidden;
-  }
-  .question-title {
-    background: #f2f4f8;
-    padding: 12px 14px;
-    font-weight: 700;
-    font-size: 17px;
-    color: #2c2c6c;
-    border-bottom: 1px solid #ddd;
-  }
+  .question { border: 1px solid #ccc; border-radius: 6px; margin-bottom: 16px; overflow: hidden; }
+  .question-title { background: #f2f4f8; padding: 12px 14px; font-weight: 700; font-size: 17px; color: #2c2c6c; border-bottom: 1px solid #ddd; }
   .question-guide { padding: 10px 14px; font-size: 14px; color: #555; font-style: italic; }
   .question textarea {
-    width: 100%;
-    min-height: 90px;
-    padding: 12px 14px;
-    border: none;
-    border-top: 1px solid #eee;
-    font-size: 15px;
-    font-family: inherit;
-    resize: vertical;
-    background: #ffffff;
+    width: 100%; min-height: 90px; padding: 12px 14px; border: none; border-top: 1px solid #eee;
+    font-size: 15px; font-family: inherit; resize: vertical; background: #ffffff;
   }
   .question textarea:focus { outline: 2px solid #6a5acd; }
+
   .tools-section { margin: 28px 0; border: 1px solid #cfe0d0; border-radius: 8px; overflow: hidden; }
   .tools-header { background: #2e7d5b; color: #fff; padding: 12px 16px; font-size: 18px; font-weight: 700; }
   .tools-note { padding: 10px 16px; font-size: 13px; color: #555; font-style: italic; background: #f4f9f5; border-bottom: 1px solid #e0ece1; }
@@ -96,61 +74,58 @@
   .tool-name a { color: #2e7d5b; text-decoration: none; }
   .tool-name a:hover { text-decoration: underline; }
   .tool-desc { font-size: 14px; color: #333; margin-top: 3px; }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
-  button.action {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-  }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; align-items: center; }
+  button.action { padding: 12px 20px; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; }
   .btn-primary { background: #3a3a8c; color: #fff; }
   .btn-secondary { background: #eaf2fb; color: #2c2c6c; border: 1px solid #b8cfe6; }
+  .btn-green { background: #2e7d5b; color: #fff; }
   .btn-danger { background: #fbeaea; color: #8c2c2c; border: 1px solid #e6b8b8; }
-  #report {
-    display: none;
-    background: #ffffff;
-    border: 2px solid #3a3a8c;
-    border-radius: 8px;
-    padding: 28px;
-    margin-top: 24px;
-  }
-  #report h2 { color: #2c2c6c; font-size: 22px; margin-bottom: 4px; }
-  #report .report-meta { font-size: 14px; color: #444; margin-bottom: 20px; }
-  #report .report-section { margin-bottom: 20px; }
-  #report .report-q { font-weight: 700; color: #2c2c6c; font-size: 16px; margin-bottom: 4px; }
-  #report .report-a { font-size: 15px; white-space: pre-wrap; border-left: 3px solid #b8cfe6; padding: 6px 12px; background: #f8fafd; }
-  #report .empty { color: #999; font-style: italic; }
+  button.action:disabled { opacity: 0.5; cursor: not-allowed; }
+
   .status { font-size: 14px; color: #2c7c2c; margin-left: 8px; }
-  .guide-wrap { margin-top: 40px; border-top: 2px dashed #cfe0d0; padding-top: 20px; }
-  details.guide { border: 1px solid #cfe0d0; border-radius: 8px; overflow: hidden; margin-top: 12px; }
-  details.guide > summary {
-    background: #2e7d5b; color: #fff; padding: 14px 18px;
-    font-size: 18px; font-weight: 700; cursor: pointer; list-style: none;
+  .status.err { color: #b23a3a; }
+  .status.warn { color: #b2792e; }
+
+  .banner { padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 18px; }
+  .banner-err { background: #fbeaea; border: 1px solid #e6b8b8; color: #8c2c2c; }
+  .banner-info { background: #eaf2fb; border: 1px solid #b8cfe6; color: #2c2c6c; }
+  .banner-ok { background: #eafbf0; border: 1px solid #b8e6c8; color: #226644; }
+
+  .whoami { font-size: 13px; color: #444; margin-bottom: 14px; }
+  .whoami strong { color: #2c2c6c; }
+  .code-chip { font-family: Consolas, monospace; background: #eef3ef; color: #22503a; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+
+  .gt-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+  .gt-table th, .gt-table td { border: 1px solid #dde5ee; padding: 8px 10px; text-align: left; }
+  .gt-table th { background: #eaf2fb; color: #2c2c6c; }
+  .gt-table td.code { font-family: Consolas, monospace; font-weight: 700; color: #22503a; }
+
+  #report, #generalReport {
+    background: #ffffff; border: 2px solid #3a3a8c; border-radius: 8px; padding: 28px; margin-top: 24px;
   }
-  details.guide > summary::-webkit-details-marker { display: none; }
-  details.guide > summary::after { content: " +"; float: right; }
-  details.guide[open] > summary::after { content: " -"; }
-  .guide-body { padding: 18px; }
-  .guide-note { background: #fdf6ec; border: 1px solid #e6cfa0; border-left: 4px solid #c9922e; border-radius: 6px; padding: 12px 16px; font-size: 13px; color: #6b4e1a; margin-bottom: 18px; }
-  .g-step { border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
-  .g-step-head { background: #eef3ef; color: #22503a; padding: 10px 14px; font-size: 16px; font-weight: 700; }
-  .g-num { display: inline-block; background: #2e7d5b; color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: 700; margin-right: 8px; font-size: 14px; }
-  .g-body { padding: 14px; font-size: 15px; }
-  .g-body p { margin-bottom: 9px; }
-  .g-body ul { margin: 6px 0 10px 22px; }
-  .g-body li { margin-bottom: 4px; }
-  .path { font-family: Consolas, monospace; background: #eef3ef; padding: 2px 7px; border-radius: 4px; font-size: 14px; color: #22503a; }
-  .url-box { font-family: Consolas, monospace; background: #1e2a24; color: #9fe6bf; padding: 10px 14px; border-radius: 6px; font-size: 15px; word-break: break-all; margin: 10px 0; display: block; }
-  .g-body figure { margin: 12px 0 4px; }
-  .g-body figure img { width: 100%; border: 1px solid #ccc; border-radius: 6px; display: block; }
-  .g-body figcaption { font-size: 12px; color: #777; font-style: italic; margin-top: 5px; text-align: center; }
-  @media (max-width: 700px) {
-    .meta-grid { grid-template-columns: 1fr; }
-    body { padding: 12px; }
-  }
+  #generalReport { border-color: #2e7d5b; }
+  #report h2, #generalReport h2 { color: #2c2c6c; font-size: 22px; margin-bottom: 4px; }
+  #generalReport h2 { color: #22503a; }
+  .report-meta { font-size: 14px; color: #444; margin-bottom: 20px; }
+  .report-section { margin-bottom: 20px; }
+  .report-q { font-weight: 700; color: #2c2c6c; font-size: 16px; margin-bottom: 4px; }
+  .report-a { font-size: 15px; white-space: pre-wrap; border-left: 3px solid #b8cfe6; padding: 6px 12px; background: #f8fafd; }
+  .report-a.empty { color: #999; font-style: italic; }
+
+  .gt-answer { border-left: 3px solid #cfe0d0; padding: 6px 12px; margin-bottom: 8px; background: #f4f9f5; font-size: 14px; white-space: pre-wrap; }
+  .gt-answer .gt-tag { font-weight: 700; color: #2e7d5b; font-size: 13px; }
+  .synthesis { background: #fdf9ec; border: 1px solid #e6d4a0; border-left: 4px solid #c9a22e; border-radius: 6px; padding: 14px 16px; font-size: 14px; white-space: pre-wrap; margin-top: 8px; }
+  .synth-note { font-size: 12px; color: #8a6d1e; font-style: italic; margin-top: 6px; }
+
+  .cloud-wrap { text-align: center; padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; margin: 10px 0 4px; line-height: 2.1; }
+  .cloud-word { display: inline-block; margin: 3px 8px; color: #3a3a8c; font-weight: 700; vertical-align: middle; }
+
+  @media (max-width: 700px) { body { padding: 12px; } }
 </style>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -163,131 +138,148 @@
 <h1 id="t-title"></h1>
 <div class="subtitle" id="t-subtitle"></div>
 
-<div class="meta-grid">
-  <div class="meta-box">
-    <label id="t-lbl-delegation"></label>
-    <input type="text" id="delegation">
-    <div class="hint" id="t-hint-delegation"></div>
-  </div>
-  <div class="meta-box">
-    <label id="t-lbl-sectors"></label>
-    <input type="text" id="sectors">
-    <div class="hint" id="t-hint-sectors"></div>
-  </div>
-  <div class="meta-box">
-    <label id="t-lbl-participants"></label>
-    <input type="text" id="participants">
-    <div class="hint" id="t-hint-participants"></div>
-  </div>
-</div>
+<div id="fbError" class="banner banner-err hidden"></div>
 
-<div class="part-header" id="t-part"></div>
-
-<div class="question">
-  <div class="question-title" id="t-q1-title"></div>
-  <div class="question-guide" id="t-q1-guide"></div>
-  <textarea id="q1"></textarea>
-</div>
-
-<div class="question">
-  <div class="question-title" id="t-q2-title"></div>
-  <div class="question-guide" id="t-q2-guide"></div>
-  <textarea id="q2"></textarea>
-</div>
-
-<div class="question">
-  <div class="question-title" id="t-q3-title"></div>
-  <div class="question-guide" id="t-q3-guide"></div>
-  <textarea id="q3"></textarea>
-</div>
-
-<div class="question">
-  <div class="question-title" id="t-q4-title"></div>
-  <div class="question-guide" id="t-q4-guide"></div>
-  <textarea id="q4"></textarea>
-</div>
-
-<div class="question">
-  <div class="question-title" id="t-q5-title"></div>
-  <div class="question-guide" id="t-q5-guide"></div>
-  <textarea id="q5"></textarea>
-</div>
-
-<div class="tools-section" id="tools-section"></div>
-
-<div class="btn-row">
-  <button class="action btn-primary" id="t-btn-generate" onclick="generateReport()"></button>
-  <button class="action btn-secondary" id="t-btn-save" onclick="saveLocal()"></button>
-  <span id="saveStatus" class="status"></span>
-  <button class="action btn-secondary" id="t-btn-export" onclick="exportJSON()"></button>
-  <button class="action btn-secondary" id="t-btn-import" onclick="document.getElementById('importFile').click()"></button>
-  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
-  <button class="action btn-danger" id="t-btn-clear" onclick="clearAll()"></button>
-</div>
-
-<div id="report"></div>
-
-<div class="guide-wrap">
-  <details class="guide">
-    <summary id="t-guide-summary">Guia de Instalação do GreenUr no QGIS</summary>
-    <div class="guide-body">
-      <div class="guide-note">
-        Material de referência técnica, disponível apenas em português. Não faz parte do formulário e não entra no relatório sistematizado. As imagens são fotos de tela do próprio workshop, recortadas e tratadas para melhorar a legibilidade.
-      </div>
-
-      <div class="g-step">
-        <div class="g-step-head"><span class="g-num">1</span>Instalar o QGIS 3.44</div>
-        <div class="g-body">
-          <p>Baixe e instale o QGIS versão 3.44 pelo site oficial <a href="https://qgis.org/download/" target="_blank" rel="noopener">qgis.org/download</a>. O GreenUr 1.3.1 exige versão recente da série 3.x; o parâmetro usado no workshop foi <span class="path">?qgis=3.44</span>.</p>
-        </div>
-      </div>
-
-      <div class="g-step">
-        <div class="g-step-head"><span class="g-num">2</span>Ativar os complementos Processing e GRASS</div>
-        <div class="g-body">
-          <p>No QGIS, vá em <span class="path">Complementos &gt; Gerenciar e Instalar Complementos &gt; Tudo</span>. Busque por "processing" e confirme que estão marcados e ativos:</p>
-          <ul><li><strong>Processing</strong></li><li><strong>GRASS GIS Processing Provider</strong></li></ul>
-          <p>São pré-requisito porque o GreenUr executa parte dos cálculos via GRASS.</p>
-          <figure><img src="passo_grass_processing.jpg" alt="Processing e GRASS marcados"><figcaption>Aba Instalados com Processing e GRASS ativos.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="g-step">
-        <div class="g-step-head"><span class="g-num">3</span>Ajustar a filtragem de feições no Processamento</div>
-        <div class="g-body">
-          <p>Vá em <span class="path">Configurações &gt; Opções &gt; Processamento &gt; Geral</span>. Localize <strong>Filtragem de feições inválida</strong>, dê duplo clique no valor ao lado e escolha <strong>Pular (ignorar) feições com geometria inválida</strong>. Isso evita que geometrias inválidas interrompam a execução no meio.</p>
-          <figure><img src="passo_options_processing.jpg" alt="Opções Processamento Geral"><figcaption>Opções &gt; Processamento &gt; Geral.</figcaption></figure>
-          <figure><img src="passo_processamento_filtragem.jpg" alt="Filtragem definida como Pular"><figcaption>Filtragem de feições inválida definida como Pular.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="g-step">
-        <div class="g-step-head"><span class="g-num">4</span>Adicionar o repositório do GreenUr</div>
-        <div class="g-body">
-          <p>Vá em <span class="path">Complementos &gt; Gerenciar e Instalar Complementos &gt; Opções</span>. Em Repositórios de Complementos, clique em <strong>Adicionar</strong>. Preencha Nome: GreenUr, e a URL abaixo. Deixe Sem autenticação e Habilitado marcado, e clique OK. O status deve ficar "conectado".</p>
-          <span class="url-box">https://apps.mundialis.de/who/GreenUr/plugins.xml</span>
-          <figure><img src="passo_add_repo_detalhes.jpg" alt="Detalhes do repositório GreenUr"><figcaption>Nome GreenUr e a URL do plugins.xml.</figcaption></figure>
-          <figure><img src="passo_repos_conectados.jpg" alt="GreenUr conectado"><figcaption>Repositório GreenUr conectado.</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="g-step">
-        <div class="g-step-head"><span class="g-num">5</span>Instalar o complemento GreenUr</div>
-        <div class="g-body">
-          <p>Volte para a aba <span class="path">Tudo</span> e digite "green" na busca. Selecione <strong>GreenUr</strong> (autor mundialis, versão 1.3.1) e clique em <strong>Instalar Complemento</strong>.</p>
-          <figure><img src="passo_buscar_greenur.jpg" alt="Busca por GreenUr"><figcaption>GreenUr localizado, pronto para instalar.</figcaption></figure>
-        </div>
-      </div>
-
+<!-- ============ GATE ============ -->
+<div id="gate">
+  <div class="gate-grid">
+    <div class="card">
+      <h2 id="t-gate-part-title"></h2>
+      <p class="desc" id="t-gate-part-desc"></p>
+      <label class="fld" id="t-lbl-turma-part"></label>
+      <input class="fld" id="in-turma-part" autocomplete="off">
+      <label class="fld" id="t-lbl-gtname"></label>
+      <input class="fld" id="in-gtname" autocomplete="off">
+      <label class="fld" id="t-lbl-gtcode"></label>
+      <input class="fld" id="in-gtcode" autocomplete="off">
+      <button class="action btn-primary" id="t-btn-enter-gt" onclick="enterAsGT()"></button>
+      <span id="gtEnterStatus" class="status"></span>
     </div>
-  </details>
+
+    <div class="card">
+      <h2 id="t-gate-admin-title"></h2>
+      <p class="desc" id="t-gate-admin-desc"></p>
+      <label class="fld" id="t-lbl-turma-admin"></label>
+      <input class="fld" id="in-turma-admin" autocomplete="off">
+      <label class="fld" id="t-lbl-adminpass"></label>
+      <input class="fld" id="in-adminpass" type="password" autocomplete="off">
+      <button class="action btn-green" id="t-btn-enter-admin" onclick="enterAsAdmin()"></button>
+      <span id="adminEnterStatus" class="status"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMIN PANEL ============ -->
+<div id="adminPanel" class="hidden">
+  <div class="banner banner-ok" id="t-admin-banner"></div>
+  <div class="card">
+    <h2 id="t-admin-gts-title"></h2>
+    <p class="desc" id="t-admin-gts-desc"></p>
+    <label class="fld" id="t-lbl-newgt"></label>
+    <input class="fld" id="in-newgt" autocomplete="off">
+    <button class="action btn-green" id="t-btn-creategt" onclick="createGT()"></button>
+    <span id="createGtStatus" class="status"></span>
+    <div id="gtList"></div>
+  </div>
+  <div class="btn-row">
+    <button class="action btn-primary" id="t-btn-view-general-admin" onclick="showGeneralReport()"></button>
+    <button class="action btn-green" id="t-btn-gen-synth" onclick="generateSynthesis()"></button>
+    <span id="synthStatus" class="status"></span>
+    <button class="action btn-secondary" id="t-btn-logout-admin" onclick="logout()"></button>
+  </div>
+  <div id="generalReport" class="hidden"></div>
+</div>
+
+<!-- ============ GT FORM ============ -->
+<div id="gtPanel" class="hidden">
+  <div class="whoami" id="whoami"></div>
+
+  <div class="meta-grid">
+    <div class="meta-box">
+      <label id="t-lbl-delegation"></label>
+      <input type="text" id="delegation">
+      <div class="hint" id="t-hint-delegation"></div>
+    </div>
+    <div class="meta-box">
+      <label id="t-lbl-sectors"></label>
+      <input type="text" id="sectors">
+      <div class="hint" id="t-hint-sectors"></div>
+    </div>
+    <div class="meta-box">
+      <label id="t-lbl-participants"></label>
+      <input type="text" id="participants">
+      <div class="hint" id="t-hint-participants"></div>
+    </div>
+  </div>
+
+  <div class="part-header" id="t-part"></div>
+
+  <div class="question"><div class="question-title" id="t-q1-title"></div><div class="question-guide" id="t-q1-guide"></div><textarea id="q1"></textarea></div>
+  <div class="question"><div class="question-title" id="t-q2-title"></div><div class="question-guide" id="t-q2-guide"></div><textarea id="q2"></textarea></div>
+  <div class="question"><div class="question-title" id="t-q3-title"></div><div class="question-guide" id="t-q3-guide"></div><textarea id="q3"></textarea></div>
+  <div class="question"><div class="question-title" id="t-q4-title"></div><div class="question-guide" id="t-q4-guide"></div><textarea id="q4"></textarea></div>
+  <div class="question"><div class="question-title" id="t-q5-title"></div><div class="question-guide" id="t-q5-guide"></div><textarea id="q5"></textarea></div>
+
+  <div class="tools-section" id="tools-section"></div>
+
+  <div class="btn-row">
+    <button class="action btn-primary" id="t-btn-save" onclick="saveGT()"></button>
+    <span id="saveStatus" class="status"></span>
+    <button class="action btn-secondary" id="t-btn-generate" onclick="generateReport()"></button>
+    <button class="action btn-secondary" id="t-btn-view-general" onclick="showGeneralReport()"></button>
+    <button class="action btn-secondary" id="t-btn-logout-gt" onclick="logout()"></button>
+  </div>
+
+  <div id="report" class="hidden"></div>
 </div>
 
 <script>
+// ============ FIREBASE ============
+const firebaseConfig = {
+  apiKey: "AIzaSyBT60kPu7Xa6tQFrRTn1hu6vj0Oass0dxQ",
+  authDomain: "climate-change-workshop.firebaseapp.com",
+  projectId: "climate-change-workshop",
+  storageBucket: "climate-change-workshop.firebasestorage.app",
+  messagingSenderId: "1037412309888",
+  appId: "1:1037412309888:web:426c5e1d22b05a64913f65",
+  measurementId: "G-H8L2M9LB6B"
+};
+
+let db = null;
+let FB_OK = false;
+try {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  FB_OK = true;
+} catch (e) {
+  FB_OK = false;
+}
+
+// Firestore layout:
+// workshops/{turma}                     -> { adminPass, createdAt }
+// workshops/{turma}/gts/{code}          -> { name, code, delegation, sectors, participants, q1..q5, updatedAt }
+// workshops/{turma}/meta/synthesis      -> { text, generatedAt, model }
+const ROOT = 'workshops';
+
+// ============ I18N ============
 const I18N = {
   en: {
     title: "Country Action Template",
     subtitle: "Workshop on WHO Tools for Environmental Health, Climate Change and Equity. Brasilia, July 2026",
+    gatePartTitle: "Enter as a working group (GT)",
+    gatePartDesc: "Type the class name, your group name and the access code given by the coordinator.",
+    lblTurmaPart: "Class name", lblGtName: "Group name (GT)", lblGtCode: "Access code",
+    btnEnterGt: "Enter group",
+    gateAdminTitle: "Enter as coordinator (admin)",
+    gateAdminDesc: "Create or open a class, generate group codes and build the consolidated report.",
+    lblTurmaAdmin: "Class name", lblAdminPass: "Admin password",
+    btnEnterAdmin: "Enter as admin",
+    adminBanner: "Admin mode. Everything you and the groups save is stored live and visible to everyone in this class.",
+    adminGtsTitle: "Working groups (GTs)",
+    adminGtsDesc: "Create a group; the system generates a unique code. Share the class name plus that code with each group.",
+    lblNewGt: "New group name", btnCreateGt: "Create group and generate code",
+    btnViewGeneralAdmin: "View consolidated report", btnGenSynth: "Generate AI synthesis (strengths/weaknesses)",
+    btnLogoutAdmin: "Exit",
     lblDelegation: "Delegation", hintDelegation: "City / State / Country",
     lblSectors: "Sector(s)", hintSectors: "Health / Environment / Planning / Other",
     lblParticipants: "Participants", hintParticipants: "Names and roles",
@@ -309,18 +301,49 @@ const I18N = {
       { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software that quantifies the health co-benefits of carbon reductions reported in NDCs. Replaced CaRBonH. Supports question 4." },
       { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software for health impact assessment of air pollution (PM2.5 and others), estimating attributable burden of disease. Supports questions 1 and 2." }
     ],
-    btnGenerate: "Generate systematized report",
-    btnSave: "Save draft", btnExport: "Export (.json for GT)", btnImport: "Import (.json)", btnClear: "Clear",
-    reportTitle: "Country Action Template. Systematized Report",
+    btnSave: "Save (live)", btnGenerate: "Group report",
+    btnViewGeneral: "Consolidated report", btnLogoutGt: "Exit",
+    reportTitle: "Country Action Template. Group Report",
+    generalTitle: "Consolidated Report. All Groups",
     rDelegation: "Delegation:", rSectors: "Sector(s):", rParticipants: "Participants:",
     rGenerated: "Generated:", notFilled: "(not filled)", noAnswer: "(no answer)",
-    saved: "saved", imported: "Imported.", invalidFile: "Invalid file:",
-    confirmClear: "Clear all fields and local draft?", saveError: "Could not save locally:",
-    guideSummary: "GreenUr installation guide for QGIS (Portuguese only)"
+    rGroup: "Group:", rGtsCount: "Groups with saved answers:",
+    saved: "saved live", saveError: "Could not save:", loadError: "Could not load:",
+    cloudTitle: "Word cloud (all answers)",
+    synthTitle: "AI synthesis: strengths and weaknesses per question",
+    synthNote: "Generated by AI from the real group answers. Review before use. Runs only inside Claude.ai; the published site only reads what was saved.",
+    synthNone: "No synthesis generated yet.",
+    synthWorking: "Generating from real answers...",
+    synthApiFail: "AI synthesis unavailable in this environment (API only works inside Claude.ai). The word cloud and per-question answers below still work.",
+    whoami: "You are in group",
+    inClass: "in class",
+    errNoTurma: "Type the class name.", errNoGt: "Type the group name.", errNoCode: "Type the access code.",
+    errNoPass: "Type the admin password.", errBadCode: "Group or code not found in this class.",
+    errBadPass: "Wrong admin password for this class.",
+    errNoFb: "No connection to the database. Check your Firebase setup and internet. Nothing was saved.",
+    gtCreated: "Group created.", gtExists: "A group with that name already exists.",
+    confirmNewClass: "This class does not exist yet. Create it now with this admin password?",
+    thName: "Group", thCode: "Code", thUpdated: "Last saved", thStatus: "Status",
+    stAnswered: "answered", stEmpty: "empty",
+    synthDone: "Synthesis saved for everyone."
   },
   pt: {
     title: "Modelo de Ação Nacional",
     subtitle: "Oficina sobre Ferramentas da OMS para Saúde Ambiental, Mudança Climática e Equidade. Brasília, julho de 2026",
+    gatePartTitle: "Entrar como grupo de trabalho (GT)",
+    gatePartDesc: "Digite o nome da turma, o nome do seu grupo e o código de acesso fornecido pela coordenação.",
+    lblTurmaPart: "Nome da turma", lblGtName: "Nome do grupo (GT)", lblGtCode: "Código de acesso",
+    btnEnterGt: "Entrar no grupo",
+    gateAdminTitle: "Entrar como coordenação (admin)",
+    gateAdminDesc: "Crie ou abra uma turma, gere os códigos dos grupos e monte o relatório consolidado.",
+    lblTurmaAdmin: "Nome da turma", lblAdminPass: "Senha de admin",
+    btnEnterAdmin: "Entrar como admin",
+    adminBanner: "Modo admin. Tudo que você e os grupos salvam fica gravado ao vivo e visível para todos desta turma.",
+    adminGtsTitle: "Grupos de trabalho (GTs)",
+    adminGtsDesc: "Crie um grupo; o sistema gera um código único. Passe o nome da turma mais esse código para cada grupo.",
+    lblNewGt: "Nome do novo grupo", btnCreateGt: "Criar grupo e gerar código",
+    btnViewGeneralAdmin: "Ver relatório consolidado", btnGenSynth: "Gerar síntese por IA (forças/fraquezas)",
+    btnLogoutAdmin: "Sair",
     lblDelegation: "Delegação", hintDelegation: "Cidade / Estado / País",
     lblSectors: "Setor(es)", hintSectors: "Saúde / Meio Ambiente / Planejamento / Outro",
     lblParticipants: "Participantes", hintParticipants: "Nomes e funções",
@@ -342,18 +365,49 @@ const I18N = {
       { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software que quantifica os cobenefícios de saúde das reduções de carbono reportadas nas NDCs. Substituiu o CaRBonH. Apoia a pergunta 4." },
       { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software de avaliação de impacto da poluição do ar na saúde (PM2.5 e outros), estimando a carga de doença atribuível. Apoia as perguntas 1 e 2." }
     ],
-    btnGenerate: "Gerar relatório sistematizado",
-    btnSave: "Salvar rascunho", btnExport: "Exportar (.json para GT)", btnImport: "Importar (.json)", btnClear: "Limpar",
-    reportTitle: "Modelo de Ação Nacional. Relatório Sistematizado",
+    btnSave: "Salvar (ao vivo)", btnGenerate: "Relatório do grupo",
+    btnViewGeneral: "Relatório consolidado", btnLogoutGt: "Sair",
+    reportTitle: "Modelo de Ação Nacional. Relatório do Grupo",
+    generalTitle: "Relatório Consolidado. Todos os Grupos",
     rDelegation: "Delegação:", rSectors: "Setor(es):", rParticipants: "Participantes:",
     rGenerated: "Gerado em:", notFilled: "(não preenchido)", noAnswer: "(sem resposta)",
-    saved: "salvo", imported: "Importado.", invalidFile: "Arquivo inválido:",
-    confirmClear: "Limpar todos os campos e o rascunho local?", saveError: "Não foi possível salvar localmente:",
-    guideSummary: "Guia de Instalação do GreenUr no QGIS"
+    rGroup: "Grupo:", rGtsCount: "Grupos com respostas salvas:",
+    saved: "salvo ao vivo", saveError: "Não foi possível salvar:", loadError: "Não foi possível carregar:",
+    cloudTitle: "Nuvem de palavras (todas as respostas)",
+    synthTitle: "Síntese por IA: forças e fraquezas por questão",
+    synthNote: "Gerada por IA a partir das respostas reais dos grupos. Revise antes de usar. Roda apenas dentro do Claude.ai; o site publicado só lê o que foi salvo.",
+    synthNone: "Nenhuma síntese gerada ainda.",
+    synthWorking: "Gerando a partir das respostas reais...",
+    synthApiFail: "Síntese por IA indisponível neste ambiente (a API só funciona dentro do Claude.ai). A nuvem de palavras e as respostas por questão abaixo continuam funcionando.",
+    whoami: "Você está no grupo",
+    inClass: "na turma",
+    errNoTurma: "Digite o nome da turma.", errNoGt: "Digite o nome do grupo.", errNoCode: "Digite o código de acesso.",
+    errNoPass: "Digite a senha de admin.", errBadCode: "Grupo ou código não encontrado nesta turma.",
+    errBadPass: "Senha de admin incorreta para esta turma.",
+    errNoFb: "Sem conexão com o banco de dados. Verifique o Firebase e a internet. Nada foi salvo.",
+    gtCreated: "Grupo criado.", gtExists: "Já existe um grupo com esse nome.",
+    confirmNewClass: "Esta turma ainda não existe. Criar agora com esta senha de admin?",
+    thName: "Grupo", thCode: "Código", thUpdated: "Último salvamento", thStatus: "Situação",
+    stAnswered: "respondido", stEmpty: "vazio",
+    synthDone: "Síntese salva para todos."
   },
   es: {
     title: "Plantilla de Accion por Pais",
     subtitle: "Taller sobre Herramientas de la OMS para Salud Ambiental, Cambio Climatico y Equidad. Brasilia, julio de 2026",
+    gatePartTitle: "Entrar como grupo de trabajo (GT)",
+    gatePartDesc: "Escriba el nombre de la clase, el nombre de su grupo y el codigo de acceso dado por la coordinacion.",
+    lblTurmaPart: "Nombre de la clase", lblGtName: "Nombre del grupo (GT)", lblGtCode: "Codigo de acceso",
+    btnEnterGt: "Entrar al grupo",
+    gateAdminTitle: "Entrar como coordinacion (admin)",
+    gateAdminDesc: "Cree o abra una clase, genere los codigos de los grupos y arme el informe consolidado.",
+    lblTurmaAdmin: "Nombre de la clase", lblAdminPass: "Contrasena de admin",
+    btnEnterAdmin: "Entrar como admin",
+    adminBanner: "Modo admin. Todo lo que usted y los grupos guardan queda grabado en vivo y visible para todos en esta clase.",
+    adminGtsTitle: "Grupos de trabajo (GTs)",
+    adminGtsDesc: "Cree un grupo; el sistema genera un codigo unico. Comparta el nombre de la clase mas ese codigo con cada grupo.",
+    lblNewGt: "Nombre del nuevo grupo", btnCreateGt: "Crear grupo y generar codigo",
+    btnViewGeneralAdmin: "Ver informe consolidado", btnGenSynth: "Generar sintesis por IA (fortalezas/debilidades)",
+    btnLogoutAdmin: "Salir",
     lblDelegation: "Delegacion", hintDelegation: "Ciudad / Estado / Pais",
     lblSectors: "Sector(es)", hintSectors: "Salud / Medio Ambiente / Planificacion / Otro",
     lblParticipants: "Participantes", hintParticipants: "Nombres y funciones",
@@ -375,166 +429,377 @@ const I18N = {
       { name: "CLIMAQ-H", url: "https://www.who.int/europe/tools-and-toolkits/climate-change-mitigation--air-quality-and-health-(climaq-h)", desc: "Software que cuantifica los cobeneficios de salud de las reducciones de carbono reportadas en las NDC. Reemplazo a CaRBonH. Apoya la pregunta 4." },
       { name: "AirQ+", url: "https://www.who.int/europe/tools-and-toolkits/airq---software-tool-for-health-risk-assessment-of-air-pollution", desc: "Software de evaluacion del impacto de la contaminacion del aire en la salud (PM2.5 y otros), estimando la carga de enfermedad atribuible. Apoya las preguntas 1 y 2." }
     ],
-    btnGenerate: "Generar informe sistematizado",
-    btnSave: "Guardar borrador", btnExport: "Exportar (.json para GT)", btnImport: "Importar (.json)", btnClear: "Limpiar",
-    reportTitle: "Plantilla de Accion por Pais. Informe Sistematizado",
+    btnSave: "Guardar (en vivo)", btnGenerate: "Informe del grupo",
+    btnViewGeneral: "Informe consolidado", btnLogoutGt: "Salir",
+    reportTitle: "Plantilla de Accion por Pais. Informe del Grupo",
+    generalTitle: "Informe Consolidado. Todos los Grupos",
     rDelegation: "Delegacion:", rSectors: "Sector(es):", rParticipants: "Participantes:",
     rGenerated: "Generado:", notFilled: "(sin completar)", noAnswer: "(sin respuesta)",
-    saved: "guardado", imported: "Importado.", invalidFile: "Archivo invalido:",
-    confirmClear: "Limpiar todos los campos y el borrador local?", saveError: "No se pudo guardar localmente:",
-    guideSummary: "Guía de instalación de GreenUr en QGIS (solo en portugués)"
+    rGroup: "Grupo:", rGtsCount: "Grupos con respuestas guardadas:",
+    saved: "guardado en vivo", saveError: "No se pudo guardar:", loadError: "No se pudo cargar:",
+    cloudTitle: "Nube de palabras (todas las respuestas)",
+    synthTitle: "Sintesis por IA: fortalezas y debilidades por pregunta",
+    synthNote: "Generada por IA a partir de las respuestas reales de los grupos. Revise antes de usar. Funciona solo dentro de Claude.ai; el sitio publicado solo lee lo que se guardo.",
+    synthNone: "Aun no se genero ninguna sintesis.",
+    synthWorking: "Generando a partir de las respuestas reales...",
+    synthApiFail: "Sintesis por IA no disponible en este entorno (la API solo funciona dentro de Claude.ai). La nube de palabras y las respuestas por pregunta siguen funcionando.",
+    whoami: "Usted esta en el grupo",
+    inClass: "en la clase",
+    errNoTurma: "Escriba el nombre de la clase.", errNoGt: "Escriba el nombre del grupo.", errNoCode: "Escriba el codigo de acceso.",
+    errNoPass: "Escriba la contrasena de admin.", errBadCode: "Grupo o codigo no encontrado en esta clase.",
+    errBadPass: "Contrasena de admin incorrecta para esta clase.",
+    errNoFb: "Sin conexion con la base de datos. Verifique Firebase e internet. No se guardo nada.",
+    gtCreated: "Grupo creado.", gtExists: "Ya existe un grupo con ese nombre.",
+    confirmNewClass: "Esta clase aun no existe. Crearla ahora con esta contrasena de admin?",
+    thName: "Grupo", thCode: "Codigo", thUpdated: "Ultimo guardado", thStatus: "Estado",
+    stAnswered: "respondido", stEmpty: "vacio",
+    synthDone: "Sintesis guardada para todos."
   }
 };
 
 const FIELDS = ['delegation','sectors','participants','q1','q2','q3','q4','q5'];
-const STORAGE_KEY = 'countryActionTemplate_v2';
-const LANG_KEY = 'countryActionTemplate_lang';
-let LANG = 'en';
+const LANG_KEY = 'cat_lang_v3';
+let LANG = 'pt';
+let SESSION = { role: null, turma: null, gtCode: null, gtName: null };
 
 function T() { return I18N[LANG]; }
+function el(id){ return document.getElementById(id); }
+function slug(s){ return (s||'').trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+// ============ LANG ============
 function applyLangText() {
   const t = T();
   document.documentElement.lang = LANG;
-  document.getElementById('t-title').textContent = t.title;
-  document.getElementById('t-subtitle').textContent = t.subtitle;
-  document.getElementById('t-lbl-delegation').textContent = t.lblDelegation;
-  document.getElementById('t-hint-delegation').textContent = t.hintDelegation;
-  document.getElementById('delegation').placeholder = t.hintDelegation;
-  document.getElementById('t-lbl-sectors').textContent = t.lblSectors;
-  document.getElementById('t-hint-sectors').textContent = t.hintSectors;
-  document.getElementById('sectors').placeholder = t.hintSectors;
-  document.getElementById('t-lbl-participants').textContent = t.lblParticipants;
-  document.getElementById('t-hint-participants').textContent = t.hintParticipants;
-  document.getElementById('participants').placeholder = t.hintParticipants;
-  document.getElementById('t-part').textContent = t.part;
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById('t-q'+i+'-title').textContent = t['q'+i+'t'];
-    document.getElementById('t-q'+i+'-guide').textContent = t['q'+i+'g'];
-  }
-  document.getElementById('t-btn-generate').textContent = t.btnGenerate;
-  document.getElementById('t-btn-save').textContent = t.btnSave;
-  document.getElementById('t-btn-export').textContent = t.btnExport;
-  document.getElementById('t-btn-import').textContent = t.btnImport;
-  document.getElementById('t-btn-clear').textContent = t.btnClear;
-  let th = '<div class="tools-header">' + t.toolsTitle + '</div>';
-  th += '<div class="tools-note">' + t.toolsNote + '</div>';
+  el('t-title').textContent = t.title;
+  el('t-subtitle').textContent = t.subtitle;
+  // gate
+  el('t-gate-part-title').textContent = t.gatePartTitle;
+  el('t-gate-part-desc').textContent = t.gatePartDesc;
+  el('t-lbl-turma-part').textContent = t.lblTurmaPart;
+  el('t-lbl-gtname').textContent = t.lblGtName;
+  el('t-lbl-gtcode').textContent = t.lblGtCode;
+  el('t-btn-enter-gt').textContent = t.btnEnterGt;
+  el('t-gate-admin-title').textContent = t.gateAdminTitle;
+  el('t-gate-admin-desc').textContent = t.gateAdminDesc;
+  el('t-lbl-turma-admin').textContent = t.lblTurmaAdmin;
+  el('t-lbl-adminpass').textContent = t.lblAdminPass;
+  el('t-btn-enter-admin').textContent = t.btnEnterAdmin;
+  // admin
+  el('t-admin-banner').textContent = t.adminBanner;
+  el('t-admin-gts-title').textContent = t.adminGtsTitle;
+  el('t-admin-gts-desc').textContent = t.adminGtsDesc;
+  el('t-lbl-newgt').textContent = t.lblNewGt;
+  el('t-btn-creategt').textContent = t.btnCreateGt;
+  el('t-btn-view-general-admin').textContent = t.btnViewGeneralAdmin;
+  el('t-btn-gen-synth').textContent = t.btnGenSynth;
+  el('t-btn-logout-admin').textContent = t.btnLogoutAdmin;
+  // gt form
+  el('t-lbl-delegation').textContent = t.lblDelegation;
+  el('t-hint-delegation').textContent = t.hintDelegation;
+  el('delegation').placeholder = t.hintDelegation;
+  el('t-lbl-sectors').textContent = t.lblSectors;
+  el('t-hint-sectors').textContent = t.hintSectors;
+  el('sectors').placeholder = t.hintSectors;
+  el('t-lbl-participants').textContent = t.lblParticipants;
+  el('t-hint-participants').textContent = t.hintParticipants;
+  el('participants').placeholder = t.hintParticipants;
+  el('t-part').textContent = t.part;
+  for (let i=1;i<=5;i++){ el('t-q'+i+'-title').textContent=t['q'+i+'t']; el('t-q'+i+'-guide').textContent=t['q'+i+'g']; }
+  el('t-btn-save').textContent = t.btnSave;
+  el('t-btn-generate').textContent = t.btnGenerate;
+  el('t-btn-view-general').textContent = t.btnViewGeneral;
+  el('t-btn-logout-gt').textContent = t.btnLogoutGt;
+  // tools
+  let th = '<div class="tools-header">'+t.toolsTitle+'</div>';
+  th += '<div class="tools-note">'+t.toolsNote+'</div>';
   t.tools.forEach(tool => {
-    th += '<div class="tool-item">';
-    th += '<div class="tool-name"><a href="' + tool.url + '" target="_blank" rel="noopener">' + tool.name + '</a></div>';
-    th += '<div class="tool-desc">' + tool.desc + '</div>';
-    th += '</div>';
+    th += '<div class="tool-item"><div class="tool-name"><a href="'+tool.url+'" target="_blank" rel="noopener">'+tool.name+'</a></div><div class="tool-desc">'+tool.desc+'</div></div>';
   });
-  document.getElementById('tools-section').innerHTML = th;
-  document.getElementById('t-guide-summary').textContent = t.guideSummary;
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === LANG);
+  el('tools-section').innerHTML = th;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===LANG));
+  if (SESSION.role) refreshWhoami();
+}
+function setLang(l){ LANG=l; try{localStorage.setItem(LANG_KEY,l);}catch(e){} applyLangText(); }
+
+function refreshWhoami(){
+  const t=T();
+  if (SESSION.role==='gt') el('whoami').innerHTML = t.whoami+' <strong>'+esc(SESSION.gtName)+'</strong> ('+t.inClass+' <strong>'+esc(SESSION.turma)+'</strong>). '+t.rGroup.replace(':','')+' <span class="code-chip">'+esc(SESSION.gtCode)+'</span>';
+}
+
+// ============ FB GUARD ============
+function requireFb(){
+  if (FB_OK) { el('fbError').classList.add('hidden'); return true; }
+  el('fbError').textContent = T().errNoFb;
+  el('fbError').classList.remove('hidden');
+  return false;
+}
+function tCol(turma){ return db.collection(ROOT).doc(turma).collection('gts'); }
+function tDoc(turma){ return db.collection(ROOT).doc(turma); }
+
+// ============ ADMIN ============
+async function enterAsAdmin(){
+  const s=el('adminEnterStatus'); const t=T(); s.className='status'; s.textContent='';
+  if (!requireFb()) return;
+  const turma=slug(el('in-turma-admin').value);
+  const pass=el('in-adminpass').value.trim();
+  if(!turma){ s.className='status err'; s.textContent=t.errNoTurma; return; }
+  if(!pass){ s.className='status err'; s.textContent=t.errNoPass; return; }
+  try {
+    const snap = await tDoc(turma).get();
+    if (!snap.exists){
+      if (!confirm(t.confirmNewClass)) return;
+      await tDoc(turma).set({ adminPass: pass, createdAt: Date.now() });
+    } else {
+      if (snap.data().adminPass !== pass){ s.className='status err'; s.textContent=t.errBadPass; return; }
+    }
+    SESSION={ role:'admin', turma, gtCode:null, gtName:null };
+    el('gate').classList.add('hidden');
+    el('adminPanel').classList.remove('hidden');
+    el('gtPanel').classList.add('hidden');
+    await renderGtList();
+  } catch(e){ s.className='status err'; s.textContent=t.loadError+' '+e.message; }
+}
+
+function genCode(name){
+  const base = slug(name).replace(/-/g,'').slice(0,4) || 'gt';
+  const rnd = Math.random().toString(36).slice(2,6);
+  return (base + '-' + rnd).toUpperCase();
+}
+
+async function createGT(){
+  const s=el('createGtStatus'); const t=T(); s.className='status'; s.textContent='';
+  if (!requireFb() || SESSION.role!=='admin') return;
+  const name=el('in-newgt').value.trim();
+  if(!name){ s.className='status err'; s.textContent=t.errNoGt; return; }
+  try {
+    const existing = await tCol(SESSION.turma).where('name','==',name).get();
+    if(!existing.empty){ s.className='status warn'; s.textContent=t.gtExists; return; }
+    const code=genCode(name);
+    await tCol(SESSION.turma).doc(code).set({
+      name, code, delegation:'', sectors:'', participants:'',
+      q1:'',q2:'',q3:'',q4:'',q5:'', updatedAt: Date.now()
+    });
+    el('in-newgt').value='';
+    s.className='status'; s.textContent=t.gtCreated+' '+code;
+    await renderGtList();
+  } catch(e){ s.className='status err'; s.textContent=t.saveError+' '+e.message; }
+}
+
+async function renderGtList(){
+  const t=T();
+  const snap = await tCol(SESSION.turma).get();
+  const rows=[];
+  snap.forEach(d=>rows.push(d.data()));
+  rows.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
+  let h='<table class="gt-table"><thead><tr><th>'+t.thName+'</th><th>'+t.thCode+'</th><th>'+t.thUpdated+'</th><th>'+t.thStatus+'</th></tr></thead><tbody>';
+  if(!rows.length){ h+='<tr><td colspan="4" style="color:#999">-</td></tr>'; }
+  rows.forEach(r=>{
+    const answered = FIELDS.some(f=>(r[f]||'').trim());
+    const when = r.updatedAt ? new Date(r.updatedAt).toLocaleString() : '-';
+    h+='<tr><td>'+esc(r.name)+'</td><td class="code">'+esc(r.code)+'</td><td>'+when+'</td><td>'+(answered?t.stAnswered:t.stEmpty)+'</td></tr>';
   });
+  h+='</tbody></table>';
+  el('gtList').innerHTML=h;
 }
 
-function setLang(l) {
-  LANG = l;
-  try { localStorage.setItem(LANG_KEY, l); } catch(e){}
-  applyLangText();
-  const r = document.getElementById('report');
-  if (r.style.display === 'block') generateReport();
-}
-
-function collect() {
-  const d = {};
-  FIELDS.forEach(f => d[f] = document.getElementById(f).value.trim());
-  return d;
-}
-function apply(d) {
-  FIELDS.forEach(f => { if (d[f] !== undefined) document.getElementById(f).value = d[f]; });
-}
-function persist() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(collect())); } catch(e){}
-}
-function saveLocal() {
-  const t = T();
+// ============ GT ENTRY ============
+async function enterAsGT(){
+  const s=el('gtEnterStatus'); const t=T(); s.className='status'; s.textContent='';
+  if (!requireFb()) return;
+  const turma=slug(el('in-turma-part').value);
+  const name=el('in-gtname').value.trim();
+  const code=el('in-gtcode').value.trim().toUpperCase();
+  if(!turma){ s.className='status err'; s.textContent=t.errNoTurma; return; }
+  if(!name){ s.className='status err'; s.textContent=t.errNoGt; return; }
+  if(!code){ s.className='status err'; s.textContent=t.errNoCode; return; }
   try {
-    persist();
-    const s = document.getElementById('saveStatus');
-    s.textContent = t.saved + ' ' + new Date().toLocaleTimeString();
-    setTimeout(() => s.textContent = '', 3000);
-  } catch(e) { alert(t.saveError + ' ' + e.message); }
+    const doc = await tCol(turma).doc(code).get();
+    if(!doc.exists){ s.className='status err'; s.textContent=t.errBadCode; return; }
+    SESSION={ role:'gt', turma, gtCode:code, gtName:doc.data().name || name };
+    const d=doc.data();
+    FIELDS.forEach(f=> el(f).value = d[f]||'');
+    el('gate').classList.add('hidden');
+    el('adminPanel').classList.add('hidden');
+    el('gtPanel').classList.remove('hidden');
+    el('report').classList.add('hidden');
+    refreshWhoami();
+  } catch(e){ s.className='status err'; s.textContent=t.loadError+' '+e.message; }
 }
-function loadLocal() {
+
+function collect(){ const d={}; FIELDS.forEach(f=> d[f]=el(f).value.trim()); return d; }
+
+async function saveGT(){
+  const s=el('saveStatus'); const t=T(); s.className='status'; s.textContent='';
+  if (!requireFb() || SESSION.role!=='gt') return;
+  const d=collect(); d.updatedAt=Date.now();
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) apply(JSON.parse(raw));
-  } catch(e){}
+    await tCol(SESSION.turma).doc(SESSION.gtCode).set(d, { merge:true });
+    s.className='status'; s.textContent=t.saved+' '+new Date().toLocaleTimeString();
+    setTimeout(()=>s.textContent='',3500);
+  } catch(e){ s.className='status err'; s.textContent=t.saveError+' '+e.message; }
 }
 
-function generateReport() {
-  const d = collect();
-  const t = T();
-  const now = new Date().toLocaleString();
-  let html = '<h2>' + t.reportTitle + '</h2>';
-  html += '<div class="report-meta">';
-  html += '<strong>' + t.rDelegation + '</strong> ' + (d.delegation || t.notFilled) + '<br>';
-  html += '<strong>' + t.rSectors + '</strong> ' + (d.sectors || t.notFilled) + '<br>';
-  html += '<strong>' + t.rParticipants + '</strong> ' + (d.participants || t.notFilled) + '<br>';
-  html += '<strong>' + t.part + '</strong><br>';
-  html += '<strong>' + t.rGenerated + '</strong> ' + now;
-  html += '</div>';
-  for (let i = 1; i <= 5; i++) {
-    const q = 'q'+i;
-    html += '<div class="report-section">';
-    html += '<div class="report-q">' + t[q+'t'] + '</div>';
-    if (d[q]) html += '<div class="report-a">' + escapeHtml(d[q]) + '</div>';
-    else html += '<div class="report-a empty">' + t.noAnswer + '</div>';
-    html += '</div>';
-  }
-  const r = document.getElementById('report');
-  r.innerHTML = html;
-  r.style.display = 'block';
-  r.scrollIntoView({ behavior: 'smooth' });
-}
-function escapeHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function exportJSON() {
-  const d = collect();
-  d._lang = LANG;
-  d._exported = new Date().toISOString();
-  const name = (d.delegation || 'delegation').replace(/[^a-z0-9]/gi,'_');
-  const blob = new Blob([JSON.stringify(d, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'country_action_' + name + '.json';
-  a.click();
-}
-function importJSON(ev) {
-  const file = ev.target.files[0];
-  if (!file) return;
-  const t = T();
-  const reader = new FileReader();
-  reader.onload = e => {
-    try { apply(JSON.parse(e.target.result)); persist(); alert(t.imported); }
-    catch(err) { alert(t.invalidFile + ' ' + err.message); }
-  };
-  reader.readAsText(file);
-}
-function clearAll() {
-  const t = T();
-  if (!confirm(t.confirmClear)) return;
-  FIELDS.forEach(f => document.getElementById(f).value = '');
-  localStorage.removeItem(STORAGE_KEY);
-  document.getElementById('report').style.display = 'none';
-}
-
-// init
-try {
-  const savedLang = localStorage.getItem(LANG_KEY);
-  if (savedLang && I18N[savedLang]) LANG = savedLang;
-} catch(e){}
-FIELDS.forEach(f => {
-  document.getElementById(f).addEventListener('input', persist);
+// autosave on blur for each field
+FIELDS.forEach(f=>{
+  const node=el(f);
+  if(node) node.addEventListener('blur', ()=>{ if(SESSION.role==='gt' && FB_OK) saveGT(); });
 });
-loadLocal();
+
+// ============ GROUP REPORT ============
+function generateReport(){
+  const d=collect(); const t=T(); const now=new Date().toLocaleString();
+  let h='<h2>'+t.reportTitle+'</h2><div class="report-meta">';
+  h+='<strong>'+t.rGroup+'</strong> '+esc(SESSION.gtName||'')+'<br>';
+  h+='<strong>'+t.rDelegation+'</strong> '+(esc(d.delegation)||t.notFilled)+'<br>';
+  h+='<strong>'+t.rSectors+'</strong> '+(esc(d.sectors)||t.notFilled)+'<br>';
+  h+='<strong>'+t.rParticipants+'</strong> '+(esc(d.participants)||t.notFilled)+'<br>';
+  h+='<strong>'+t.part+'</strong><br><strong>'+t.rGenerated+'</strong> '+now+'</div>';
+  for(let i=1;i<=5;i++){
+    const q='q'+i;
+    h+='<div class="report-section"><div class="report-q">'+t[q+'t']+'</div>';
+    h+= d[q] ? '<div class="report-a">'+esc(d[q])+'</div>' : '<div class="report-a empty">'+t.noAnswer+'</div>';
+    h+='</div>';
+  }
+  const r=el('report'); r.innerHTML=h; r.classList.remove('hidden'); r.scrollIntoView({behavior:'smooth'});
+}
+
+// ============ GENERAL / CONSOLIDATED ============
+async function loadAllGTs(){
+  const snap = await tCol(SESSION.turma).get();
+  const rows=[]; snap.forEach(d=>rows.push(d.data()));
+  return rows.filter(r=> FIELDS.some(f=>(r[f]||'').trim()));
+}
+
+const STOP = new Set(("de a o e que do da em um para com nao uma os no se na por mais as dos como mas foi ao ele das tem seu sua ou ser quando muito ha nos ja esta eu tambem so pelo pela ate isso ela entre era depois sem mesmo aos seus quem nas me esse eles voce essa num nem suo meu as minha numa pelos elas qual sao ela the of and to in a is that for it with as on are be this at or an by from we you they was were has have not can which their our all more some any if than then these those " +
+"la el en los las un una y o para con por del al se su lo como pero mas este esta estos estas es son " +
+"the of and to in is that for it with as on are be this at or an by from we you they was were has have not can which their our all more some any if than then these those there here what when where who how").split(/\s+/));
+
+function tokenize(text){
+  return (text||'').toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu,' ')
+    .split(/\s+/)
+    .filter(w=> w.length>=4 && !STOP.has(w) && !/^\d+$/.test(w));
+}
+
+function buildCloud(rows){
+  const freq={};
+  rows.forEach(r=> FIELDS.filter(f=>f.startsWith('q')).forEach(f=>{
+    tokenize(r[f]).forEach(w=> freq[w]=(freq[w]||0)+1);
+  }));
+  const arr=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,40);
+  if(!arr.length) return '';
+  const max=arr[0][1], min=arr[arr.length-1][1];
+  const palette=['#3a3a8c','#2e7d5b','#6a5acd','#2c6cb0','#c9922e'];
+  let h='<div class="cloud-wrap">';
+  arr.forEach(([w,c],i)=>{
+    const size = 14 + Math.round((c-min)/Math.max(1,(max-min))*26);
+    h+='<span class="cloud-word" style="font-size:'+size+'px;color:'+palette[i%palette.length]+'">'+esc(w)+'</span>';
+  });
+  h+='</div>';
+  return h;
+}
+
+let LAST_ROWS=[];
+
+async function showGeneralReport(){
+  const t=T();
+  if(!requireFb()) return;
+  const target = SESSION.role==='admin' ? el('generalReport') : el('report');
+  try {
+    const rows = await loadAllGTs();
+    LAST_ROWS = rows;
+    let h='<h2>'+t.generalTitle+'</h2>';
+    h+='<div class="report-meta"><strong>'+t.inClass.charAt(0).toUpperCase()+t.inClass.slice(1)+':</strong> '+esc(SESSION.turma)+'<br>';
+    h+='<strong>'+t.rGtsCount+'</strong> '+rows.length+'<br><strong>'+t.rGenerated+'</strong> '+new Date().toLocaleString()+'</div>';
+
+    // saved synthesis (visible to everyone)
+    let synth=null;
+    try { const sdoc=await tDoc(SESSION.turma).collection('meta').doc('synthesis').get(); if(sdoc.exists) synth=sdoc.data(); } catch(e){}
+    h+='<div class="report-section"><div class="report-q">'+t.synthTitle+'</div>';
+    if(synth && synth.text){
+      h+='<div class="synthesis">'+esc(synth.text)+'</div>';
+      h+='<div class="synth-note">'+t.synthNote+' ('+new Date(synth.generatedAt).toLocaleString()+', '+esc(synth.model||'')+')</div>';
+    } else {
+      h+='<div class="report-a empty">'+t.synthNone+'</div>';
+    }
+    h+='</div>';
+
+    // word cloud
+    h+='<div class="report-section"><div class="report-q">'+t.cloudTitle+'</div>';
+    h+= buildCloud(rows) || '<div class="report-a empty">'+t.noAnswer+'</div>';
+    h+='</div>';
+
+    // per question, all answers
+    for(let i=1;i<=5;i++){
+      const q='q'+i;
+      h+='<div class="report-section"><div class="report-q">'+t[q+'t']+'</div>';
+      const any = rows.filter(r=>(r[q]||'').trim());
+      if(!any.length){ h+='<div class="report-a empty">'+t.noAnswer+'</div>'; }
+      else any.forEach(r=>{ h+='<div class="gt-answer"><span class="gt-tag">'+esc(r.name)+':</span> '+esc(r[q])+'</div>'; });
+      h+='</div>';
+    }
+    target.innerHTML=h; target.classList.remove('hidden'); target.scrollIntoView({behavior:'smooth'});
+  } catch(e){
+    target.innerHTML='<div class="banner banner-err">'+t.loadError+' '+esc(e.message)+'</div>';
+    target.classList.remove('hidden');
+  }
+}
+
+// ============ AI SYNTHESIS (admin only, runs in Claude.ai) ============
+async function generateSynthesis(){
+  const s=el('synthStatus'); const t=T(); s.className='status'; s.textContent='';
+  if(!requireFb() || SESSION.role!=='admin') return;
+  s.className='status warn'; s.textContent=t.synthWorking;
+  try {
+    const rows = await loadAllGTs();
+    if(!rows.length){ s.className='status warn'; s.textContent=t.noAnswer; return; }
+    const qLabels = {1:t.q1t,2:t.q2t,3:t.q3t,4:t.q4t,5:t.q5t};
+    let corpus='';
+    for(let i=1;i<=5;i++){
+      corpus += '\n### '+qLabels[i]+'\n';
+      rows.forEach(r=>{ if((r['q'+i]||'').trim()) corpus += '- ['+r.name+'] '+r['q'+i].trim()+'\n'; });
+    }
+    const langName = LANG==='pt'?'português':(LANG==='es'?'espanhol':'inglês');
+    const prompt =
+      'Você é relator de uma oficina da OMS. A seguir estão respostas REAIS de grupos de trabalho (GTs), organizadas por questão. '+
+      'Para CADA questão, escreva um parágrafo curto identificando as principais FORÇAS (pontos convergentes, bem fundamentados) e as principais FRAQUEZAS (lacunas, ausências, respostas vagas) do conjunto de respostas daquela questão. '+
+      'Baseie-se EXCLUSIVAMENTE no texto fornecido. NÃO invente dados, números ou fatos que não estejam nas respostas. Se uma questão tiver poucas respostas, diga isso. '+
+      'Escreva em '+langName+', em texto corrido, sem travessões. Comece cada bloco com o número e título da questão.\n\nRESPOSTAS:\n'+corpus;
+
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1500, messages:[{role:"user",content:prompt}] })
+    });
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    const data = await resp.json();
+    const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+    if(!text) throw new Error('empty');
+    await tDoc(SESSION.turma).collection('meta').doc('synthesis').set({
+      text, generatedAt: Date.now(), model: 'claude-sonnet-4-6'
+    });
+    s.className='status'; s.textContent=t.synthDone;
+    await showGeneralReport();
+  } catch(e){
+    s.className='status err'; s.textContent=t.synthApiFail;
+  }
+}
+
+// ============ LOGOUT ============
+function logout(){
+  SESSION={ role:null, turma:null, gtCode:null, gtName:null };
+  el('adminPanel').classList.add('hidden');
+  el('gtPanel').classList.add('hidden');
+  el('generalReport').classList.add('hidden');
+  el('report').classList.add('hidden');
+  el('gate').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============ INIT ============
+try { const sl=localStorage.getItem(LANG_KEY); if(sl && I18N[sl]) LANG=sl; } catch(e){}
 applyLangText();
+requireFb();
 </script>
 
 </body>
